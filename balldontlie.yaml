@@ -3,7 +3,7 @@ info:
   title: balldontlie
   version: 1.0.0
 servers:
-  - url: https://balldontlie.io
+  - url: https://www.balldontlie.io
 tags:
   - name: players
   - name: teams
@@ -21,16 +21,37 @@ paths:
           schema:
             type: string
           example: lebron
+          description: Used to filter players based on their name. For example, ?search=davis will return players that have 'davis' in their first or last name.
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: The page number, used for pagination.
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+          description: The number of results returned per call, used for pagination. Max 100.
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /api/v1/players/237:
+  /api/v1/players/{playerId}:
     get:
       tags:
         - players
       summary: specific player
+      parameters:
+        - name: playerId
+          in: path
+          required: true
+          description: The ID of the player to retrieve
+          schema:
+            type: integer
+          example: 123
       responses:
         '200':
           description: Successful response
@@ -41,16 +62,37 @@ paths:
       tags:
         - teams
       summary: all teams
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: The page number, used for pagination.
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 10
+          description: The number of results returned per call, used for pagination.
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /api/v1/teams/1:
+  /api/v1/teams/{teamId}:
     get:
       tags:
         - teams
       summary: specific team
+      parameters:
+        - name: teamId
+          in: path
+          required: true
+          schema:
+            type: integer
+            default: 123
+          description: The ID of the team to retrieve
       responses:
         '200':
           description: Successful response
@@ -65,23 +107,68 @@ paths:
         - name: seasons[]
           in: query
           schema:
-            type: integer
+            type: array
+            items: 
+              type: integer
+          description: An array of seasons
           example: '2018'
         - name: team_ids[]
           in: query
           schema:
-            type: integer
+            type: array
+            items: 
+              type: integer
           example: '1'
+        - name: dates
+          in: query
+          schema:
+            type: array
+            items: 
+              type: string
+          description: An array of dates formatted in 'YYYY-MM-DD'
+        - name: start_date
+          in: query
+          schema: 
+            type: array
+            items: 
+              type: string
+          description: A single date in 'YYYY-MM-DD' format. This is used to select games that occur on or after this date.
+        - name: end_date
+          in: query
+          schema: 
+            type: string
+          description: A single date in 'YYYY-MM-DD' format. This is used to select games that occur on or before this date.
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 0
+          description: The page number, used for pagination.
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+          description: The number of results returned per call, used for pagination. Max 100.
+
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /api/v1/games/32881:
+  /api/v1/games/{gameId}:
     get:
       tags:
         - games
       summary: specific game
+      parameters:
+        - name: gameId
+          in: path
+          required: true
+          description: The ID of the game to retrieve
+          schema:
+            type: integer
+          example: 123
       responses:
         '200':
           description: Successful response
@@ -93,18 +180,75 @@ paths:
         - stats
       summary: all stats (example parameters)
       parameters:
-        - name: season[]
+        - name: seasons[]
           in: query
           schema:
-            type: integer
+            type: array
+            items: 
+              type: integer 
           example: '2018'
-        - name: player_ids[]
+        - name: team_ids[]
+          in: query
+          schema:
+            type: array
+            items: 
+              type: integer
+          example: '1'
+        - name: dates
+          in: query
+          schema:
+            type: array
+            items: 
+              type: string
+        - name: start_date
+          in: query
+          schema: 
+            type: string
+        - name: end_date
+          in: query
+          schema: 
+            type: string
+        - name: page
           in: query
           schema:
             type: integer
-          example: '237'
+            default: 0
+          description: The page number, used for pagination.
+        - name: per_page
+          in: query
+          schema:
+            type: integer
+            default: 25
+          description: The number of results returned per call, used for pagination. Max 100.
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
+  
+  /api/v1/season_averages:
+    get:
+      tags: 
+      - stats
+      - players
+      summary: get season averages
+      parameters:
+        - name: season
+          in: query
+          schema:
+            type: integer
+            default: current_season
+          description: A single season
+        - name: player_ids[]
+          in: query
+          schema:
+            type: array
+            items: 
+              type: integer
+            default: current_season
+          description: An array of player_ids
+      responses:
+          '200':
+            description: Successful response
+            content:
+              application/json: {}
