@@ -15,6 +15,8 @@ info:
     email: support@thespacedevs.com
   license:
     name: Apache License 2.0
+servers:
+  - url: https://lldev.thespacedevs.com
 paths:
   /2.2.0/agencies/:
     get:
