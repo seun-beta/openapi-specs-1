@@ -1,0 +1,1052 @@
+openapi: 3.0.1
+info:
+  version: 1.0.0
+  title: Spaceflight News API
+  description: 'Documentation for the Spaceflight News API.'
+  termsOfService: https://spaceflightnewsapi.net
+  contact:
+    name: Spaceflight News API
+    email: derk@spaceflightnewsapi.net
+    url: https://spaceflightnewsapi.net
+  license:
+    name: GPLv3
+    url: https://www.gnu.org/licenses/gpl-3.0.en.html
+  x-generation-date: 01/13/2023 9:29:57 PM
+x-strapi-config:
+  path: /documentation
+  showGeneratedFiles: true
+  generateDefaultResponse: true
+  pluginsForWhichToGenerateDoc: []
+servers:
+  # Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/mjibril/sflight/1.0.0
+  - url: https://api.spaceflightnewsapi.net
+    description: Spaceflight News API
+  - url: https://api.spaceflightnewsapi.net
+    description: Spaceflight News API - I need an acc entry
+  - url: https://api.spaceflightnewsapi.net
+    description: Spaceflight News API - I need a dev entry
+externalDocs:
+  description: Part of The Space Devs
+  url: https://thespacedevs.com
+security:
+  - bearerAuth: []
+paths:
+  /v3/articles/count:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Article
+      parameters: []
+  /v3/articles:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Article'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Article
+      parameters:
+        - name: _limit
+          in: query
+          required: false
+          description: Maximum number of results possible
+          schema:
+            type: integer
+            example: 5
+          deprecated: false
+        - name: _sort
+          in: query
+          required: false
+          description: Sort according to a specific field.
+          schema:
+            type: string
+            enum: [title:asc, title:desc, publishedAt:asc, 
+publishedAt:desc]
+          deprecated: false
+        - name: _start
+          in: query
+          required: false
+          description: Skip a specific number of entries (especially 
+useful for pagination)
+          schema:
+            type: integer
+            example: 0
+          deprecated: false
+        - name: publishedAt_lt
+          in: query
+          required: false
+          description: Get record that are lower than a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_lte
+          in: query
+          required: false
+          description: Get records that are lower than or equal to a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_gt
+          in: query
+          required: false
+          description: Get records that are greater than a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_gte
+          in: query
+          required: false
+          description: Get records that are greater than  or equal a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: title_contains
+          in: query
+          required: false
+          description: Get records whose title contains a value
+          schema:
+            type: string
+          deprecated: false
+        - name: summary_contains
+          in: query
+          required: false
+          description: Get records whose summary contains a value
+          schema:
+            type: string
+          deprecated: false
+        - name: url_contains
+          in: query
+          required: false
+          description: Get records whose url contains a value
+          schema:
+            type: string
+          deprecated: false
+  /v3/articles/{id}:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Article'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Article
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+  /v3/articles/launch/{id}:
+    get:
+      deprecated: false
+      description: Get all articles linked to a launch
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  foo:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Article
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+  /v3/articles/event/{id}:
+    get:
+      deprecated: false
+      description: Get all articles linked to an event
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  foo:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Article
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+  /v3/blogs/count:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Blog
+      parameters: []
+  /v3/blogs:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Blog'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Blog
+      parameters:
+        - name: _limit
+          in: query
+          required: false
+          description: Maximum number of results possible
+          schema:
+            type: integer
+            example: 5
+          deprecated: false
+        - name: _sort
+          in: query
+          required: false
+          description: Sort according to a specific field.
+          schema:
+            type: string
+            enum: [title:asc, title:desc, publishedAt:asc, 
+publishedAt:desc]
+          deprecated: false
+        - name: _start
+          in: query
+          required: false
+          description: Skip a specific number of entries (especially 
+useful for pagination)
+          schema:
+            type: integer
+            example: 0
+          deprecated: false
+        - name: publishedAt_lt
+          in: query
+          required: false
+          description: Get record that are lower than a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_lte
+          in: query
+          required: false
+          description: Get records that are lower than or equal to a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_gt
+          in: query
+          required: false
+          description: Get records that are greater than a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_gte
+          in: query
+          required: false
+          description: Get records that are greater than  or equal a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: title_contains
+          in: query
+          required: false
+          description: Get records whose title contains a value
+          schema:
+            type: string
+          deprecated: false
+        - name: summary_contains
+          in: query
+          required: false
+          description: Get records whose summary contains a value
+          schema:
+            type: string
+          deprecated: false
+        - name: url_contains
+          in: query
+          required: false
+          description: Get records whose url contains a value
+          schema:
+            type: string
+          deprecated: false
+  /v3/blogs/{id}:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Blog'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Blog
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+  /v3/blogs/launch/{id}:
+    get:
+      deprecated: false
+      description: Get all blogs linked to a launch
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  foo:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Blog
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+  /v3/blogs/event/{id}:
+    get:
+      deprecated: false
+      description: Get all blogs linked to an event
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  foo:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Blog
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+  /v3/info:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  foo:
+                    type: string
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Info
+      parameters: []
+  /v3/reports/count:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                properties:
+                  count:
+                    type: integer
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Report
+      parameters: []
+  /v3/reports:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Report'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Report
+      parameters:
+        - name: _limit
+          in: query
+          required: false
+          description: Maximum number of results possible
+          schema:
+            type: integer
+            example: 5
+          deprecated: false
+        - name: _sort
+          in: query
+          required: false
+          description: Sort according to a specific field.
+          schema:
+            type: string
+            enum: [title:asc, title:desc, publishedAt:asc, 
+publishedAt:desc]
+          deprecated: false
+        - name: _start
+          in: query
+          required: false
+          description: Skip a specific number of entries (especially 
+useful for pagination)
+          schema:
+            type: integer
+            example: 0
+          deprecated: false
+        - name: publishedAt_lt
+          in: query
+          required: false
+          description: Get record that are lower than a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_lte
+          in: query
+          required: false
+          description: Get records that are lower than or equal to a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_gt
+          in: query
+          required: false
+          description: Get records that are greater than a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: publishedAt_gte
+          in: query
+          required: false
+          description: Get records that are greater than  or equal a value
+          schema:
+            type: string
+            format: date
+            example: 2022-03-17
+          deprecated: false
+        - name: title_contains
+          in: query
+          required: false
+          description: Get records whose title contains a value
+          schema:
+            type: string
+          deprecated: false
+        - name: summary_contains
+          in: query
+          required: false
+          description: Get records whose summary contains a value
+          schema:
+            type: string
+          deprecated: false
+        - name: url_contains
+          in: query
+          required: false
+          description: Get records whose url contains a value
+          schema:
+            type: string
+          deprecated: false
+  /v3/reports/{id}:
+    get:
+      deprecated: false
+      description: ''
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        default:
+          description: unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      summary: ''
+      tags:
+        - Report
+      parameters:
+        - name: id
+          in: path
+          description: ''
+          deprecated: false
+          required: true
+          schema:
+            type: string
+components:
+  schemas:
+    Article:
+      properties:
+        id:
+          type: integer
+        featured:
+          type: boolean
+          default: false
+        title:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        newsSite:
+          type: string
+        summary:
+          type: string
+        publishedAt:
+          type: string
+        launches:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: string
+              provider:
+                type: string
+        events:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: string
+              provider:
+                type: string
+    NewArticle:
+      required:
+        - title
+        - url
+        - imageUrl
+        - publishedAt
+        - newsSite
+      properties:
+        featured:
+          type: boolean
+          default: false
+        title:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        newsSite:
+          type: string
+        summary:
+          type: string
+        publishedAt:
+          type: string
+        launches:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: string
+              provider:
+                type: string
+        events:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: integer
+              provider:
+                type: string
+    Blog:
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        newsSite:
+          type: string
+        summary:
+          type: string
+        publishedAt:
+          type: string
+        launches:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: string
+              provider:
+                type: string
+        events:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: string
+              provider:
+                type: string
+    NewBlog:
+      required:
+        - title
+        - url
+        - imageUrl
+        - publishedAt
+        - newsSite
+      properties:
+        featured:
+          type: boolean
+          default: false
+        title:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        newsSite:
+          type: string
+        summary:
+          type: string
+        publishedAt:
+          type: string
+        launches:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: string
+              provider:
+                type: string
+        events:
+          type: array
+          items:
+            required:
+              - id
+              - launchId
+              - name
+            properties:
+              id:
+                type: integer
+              provider:
+                type: string
+    Report:
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        newsSite:
+          type: string
+        summary:
+          type: string
+        publishedAt:
+          type: string
+    NewReport:
+      required:
+        - title
+        - url
+        - imageUrl
+        - publishedAt
+        - newsSite
+      properties:
+        title:
+          type: string
+        url:
+          type: string
+        imageUrl:
+          type: string
+        newsSite:
+          type: string
+        summary:
+          type: string
+        publishedAt:
+          type: string
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+tags:
+  - name: Article
+  - name: Blog
+  - name: Info
+  - name: Report
