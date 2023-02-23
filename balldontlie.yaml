@@ -187,7 +187,7 @@ paths:
             items: 
               type: integer 
           example: '2018'
-        - name: team_ids[]
+        - name: player_ids[]
           in: query
           schema:
             type: array
