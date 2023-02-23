@@ -123,8 +123,7 @@ publishedAt:desc]
         - name: _start
           in: query
           required: false
-          description: Skip a specific number of entries (especially 
-useful for pagination)
+          description: Skip a specific number of entries (especially useful for pagination)
           schema:
             type: integer
             example: 0
@@ -400,8 +399,7 @@ publishedAt:desc]
         - name: _start
           in: query
           required: false
-          description: Skip a specific number of entries (especially 
-useful for pagination)
+          description: Skip a specific number of entries (especially useful for pagination)
           schema:
             type: integer
             example: 0
@@ -712,8 +710,7 @@ publishedAt:desc]
         - name: _start
           in: query
           required: false
-          description: Skip a specific number of entries (especially 
-useful for pagination)
+          description: Skip a specific number of entries (especially useful for pagination)
           schema:
             type: integer
             example: 0
