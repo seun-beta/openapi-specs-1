@@ -119,7 +119,7 @@ paths:
             items: 
               type: integer
           example: '1'
-        - name: dates
+        - name: dates[]
           in: query
           schema:
             type: array
@@ -194,7 +194,7 @@ paths:
             items: 
               type: integer
           example: '1'
-        - name: dates
+        - name: dates[]
           in: query
           schema:
             type: array
