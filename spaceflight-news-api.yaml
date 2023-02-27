@@ -18,15 +18,8 @@ x-strapi-config:
   generateDefaultResponse: true
   pluginsForWhichToGenerateDoc: []
 servers:
-  # Added by API Auto Mocking Plugin
-  - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/mjibril/sflight/1.0.0
   - url: https://api.spaceflightnewsapi.net
     description: Spaceflight News API
-  - url: https://api.spaceflightnewsapi.net
-    description: Spaceflight News API - I need an acc entry
-  - url: https://api.spaceflightnewsapi.net
-    description: Spaceflight News API - I need a dev entry
 externalDocs:
   description: Part of The Space Devs
   url: https://thespacedevs.com
