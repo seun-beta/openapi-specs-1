@@ -67,6 +67,7 @@ servers:
 paths:
   /1/search.php:
     get:
+      operationId: searchDrinks
       summary: Searches for drinks by name or by their first letter. Can also search for ingredients. Searches are not case sensitive.
       tags: 
         - Public
@@ -111,6 +112,7 @@ paths:
   /1/lookup.php:
     get:
       summary: Searches for drinks or ingredients by their exact ID in the database.
+      operationId: lookupDrinks
       tags: 
         - Public
       parameters:
@@ -145,6 +147,7 @@ paths:
   /1/random.php:
     get:
       summary: Returns a random drink.
+      operationId: randomDrinks
       tags: 
         - Public
       responses:
@@ -159,6 +162,7 @@ paths:
   /1/filter.php:
     get:
       summary: Filters drinks based on search criteria.
+      operationId: filterDrinks
       tags: 
         - Public
       parameters:
@@ -211,6 +215,7 @@ paths:
   /1/list.php:
     get:
       summary: Returns the list of options for each parameter of the **filter** endpoint.
+      operationId: listDrinks
       tags: 
         - Public
       parameters:
