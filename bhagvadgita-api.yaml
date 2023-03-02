@@ -1,0 +1,194 @@
+openapi: 3.0.0
+info:
+  title: Bhagavad Gita API
+  version: '1.0'
+servers:
+  - url: https://bhagavadgitaapi.in
+paths:
+  /chapters/:
+    get:
+      description: Get a list of all the 18 Chapters of the Bhagavad Gita.
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "chapters": [
+                        {
+                          "chapter_number": 1, 
+                          "name": "u'अर्जुनविषादयोग'", 
+                          "name_english": "u'Arjuna Dilemma'", 
+                          "name_transliterated": "u'Arjun Viṣhād Yog'", 
+                          "name_transliterated_simple": "u'Arjuna Visada Yoga'", 
+                          "verses_count": 47
+                        }, 
+                        {
+                          "chapter_number": 2, 
+                          "name": "u'सांख्ययोग'", 
+                          "name_english": "u'Transcendental Knowledge'", 
+                          "name_transliterated": "u'Sānkhya Yog'", 
+                          "name_transliterated_simple": "u'Sankhya Yoga'", 
+                          "verses_count": 72
+                        }
+                      ]
+                    }
+              schema:
+                $ref: '#/components/schemas/ChapterSchema'
+          description: 'Success: Everything worked as expected.'
+        '400':
+          description: 'Bad Request: The request was unacceptable due to wrong parameter(s).'
+        '401':
+          description: 'Unauthorized: Invalid access_token used.'
+        '402':
+          description: Request Failed.
+        '500':
+          description: 'Server Error: Something went wrong on our end.'
+      summary: Get all the 18 Chapters of the Bhagavad Gita.
+      tags:
+        - chapter
+  /chapter/{chapter}/:
+    get:
+      description: GET Particular Chapters details of Shreemad Bhagavad Gita
+      parameters:
+        - description: Which Chapter Number to filter? (from 1 to 18)
+          in: path
+          name: chapter
+          required: true
+          schema:
+            default: 1
+            type: integer
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                    "chapter_number": 1,
+                    "verses_count": 47,
+                    "name": "अर्जुनविषादयोग",
+                    "translation": "Arjuna Visada Yoga",
+                    "transliteration": "Arjun Viṣhād Yog",
+                    "meaning": {
+                      "en": "Arjuna's Dilemma",
+                      "hi": "अर्जुन विषाद योग"
+                    },
+                    "summary": {
+                      "en": "The first chapter of the Bhagavad Gita - Arjuna Vishada Yoga introduces the setup, the setting, the characters and the circumstances that led to the epic battle of Mahabharata, fought between the Pandavas and the Kauravas. It outlines the reasons that led to the revelation of the of Bhagavad Gita.\nAs both armies stand ready for the battle, the mighty warrior Arjuna, on observing the warriors on both sides becomes increasingly sad and depressed due to the fear of losing his relatives and friends and the consequent sins attributed to killing his own relatives. So, he surrenders to Lord Krishna, seeking a solution. Thus, follows the wisdom of the Bhagavad Gita.",
+                      "hi": "भगवद गीता का पहला अध्याय अर्जुन विशाद योग उन पात्रों और परिस्थितियों का परिचय कराता है जिनके कारण पांडवों और कौरवों के बीच महाभारत का महासंग्राम हुआ। यह अध्याय उन कारणों का वर्णन करता है जिनके कारण भगवद गीता का ईश्वरावेश हुआ। जब महाबली योद्धा अर्जुन दोनों पक्षों पर युद्ध के लिए तैयार खड़े योद्धाओं को देखते हैं तो वह अपने ही रिश्तेदारों एवं मित्रों को खोने के डर तथा फलस्वरूप पापों के कारण दुखी और उदास हो जाते हैं। इसलिए वह श्री कृष्ण को पूरी तरह से आत्मसमर्पण करते हैं। इस प्रकार, भगवद गीता के ज्ञान का प्रकाश होता है।"
+                    }
+              schema:
+                $ref: '#/components/schemas/ChapterSchema'
+          description: 'Success: Everything worked as expected.'
+        '400':
+          description: 'Bad Request: The request was unacceptable due to wrong parameter(s).'
+        '401':
+          description: 'Unauthorized: Invalid access_token used.'
+        '402':
+          description: Request Failed.
+        '404':
+          description: 'Not Found: The chapter number you are looking for could not be found.'
+        '500':
+          description: 'Server Error: Something went wrong on our end.'
+      summary: GET Particular Chapters details of Shreemad Bhagavad Gita.
+      tags:
+        - chapter
+  /slok/{chapter}/{verse}/:
+    get:
+      description: This endpoint allows you to get any random slok of Shreemad Bhagavad Gita.
+      parameters:
+        - description: specfic chapter number from any of 18 chapters
+          in: path
+          name: chapter
+          required: true
+          schema:
+            default: 1
+            type: integer
+        - description: specfic verse number avilable in that particular chapters
+          in: path
+          name: verse
+          required: true
+          schema:
+            default: 1
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "chapter_number": 1,
+                      "meaning": "Dhritarashtra said: O Sanjay, after gathering on the holy field of Kurukshetra, and desiring to fight, what did my sons and the sons of Pandu do?",
+                      "text": "धृतराष्ट्र उवाच | धर्मक्षेत्रे कुरुक्षेत्रे समवेता युयुत्सवः | मामकाः पाण्डवाश्चैव किमकुर्वत सञ्जय |||1||",
+                      "transliteration": "dhṛitarāśhtra uvācha dharma-kṣhetre kuru-kṣhetre samavetā yuyutsavaḥ māmakāḥ pāṇḍavāśhchaiva kimakurvata sañjaya",
+                      "verse_number": 1,
+                      "word_meanings": "dhṛitarāśhtraḥ uvācha—Dhritarashtra said; dharma-kṣhetre—the land of dharma; kuru-kṣhetre—at Kurukshetra; samavetāḥ—having gathered; yuyutsavaḥ—desiring to fight; māmakāḥ—my sons; pāṇḍavāḥ—the sons of Pandu; cha—and; eva—certainly; kim—what; akurvata—did they do; sañjaya—Sanjay"
+                    }
+              schema:
+                $ref: '#/components/schemas/VerseSchema'
+          description: 'Success: Everything worked as expected.'
+        '400':
+          description: 'Bad Request: The request was unacceptable due to wrong parameter(s).'
+        '401':
+          description: 'Unauthorized: Invalid access_token used.'
+        '402':
+          description: Request Failed.
+        '404':
+          description: 'Not Found: The chapter/verse number you are looking for could not be found.'
+        '500':
+          description: 'Server Error: Something went wrong on our end.'
+      summary: This endpoint allows you to get any random slok of Shreemad Bhagavad Gita.
+      tags:
+        - verse
+components:
+  schemas:
+    ChapterSchema:
+      properties:
+        chapter_number:
+          format: int32
+          nullable: true
+          type: integer
+        chapter_summary:
+          nullable: true
+          type: string
+        name:
+          nullable: true
+          type: string
+        name_meaning:
+          nullable: true
+          type: string
+        name_translation:
+          nullable: true
+          type: string
+        name_transliterated:
+          nullable: true
+          type: string
+        verses_count:
+          format: int32
+          nullable: true
+          type: integer
+      type: object
+    VerseSchema:
+      properties:
+        meaning:
+          nullable: true
+          type: string
+        text:
+          nullable: true
+          type: string
+        transliteration:
+          nullable: true
+          type: string
+        verse_number:
+          nullable: true
+          type: string
+        word_meanings:
+          nullable: true
+          type: string
+      type: object
