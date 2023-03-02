@@ -7,6 +7,7 @@ servers:
 paths:
   /chapters/:
     get:
+      operationId: getChapters
       description: Get a list of all the 18 Chapters of the Bhagavad Gita.
       responses:
         '200':
@@ -53,6 +54,7 @@ paths:
         - chapter
   /chapter/{chapter}/:
     get:
+      operationId: getChapterByNumber
       description: GET Particular Chapters details of Shreemad Bhagavad Gita
       parameters:
         - description: Which Chapter Number to filter? (from 1 to 18)
@@ -101,6 +103,7 @@ paths:
         - chapter
   /slok/{chapter}/{verse}/:
     get:
+      operationId: getSlokByChapterByVerse
       description: This endpoint allows you to get any random slok of Shreemad Bhagavad Gita.
       parameters:
         - description: specfic chapter number from any of 18 chapters
