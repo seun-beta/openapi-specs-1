@@ -1,0 +1,272 @@
+openapi: 3.0.0
+info:
+  title: Open Library - API
+  description: >-
+    Open Library has a RESTful API, best used to link into Open Library data in
+    JSON, YAML and RDF/XML.
+    Work metadata will include general umbrella information about a book, whereas an Edition will have a publisher, an ISBN, a book-jacket, and other specific information.
+  version: 1.0.0
+servers:
+  - url: https://openlibrary.org
+paths:
+  /search.json:
+    get:
+      operationId: search
+      tags:
+        - works
+        - search
+      summary:
+        Search for titles, books, authors. Check https://openlibrary.org/search/howto for more details
+      parameters:
+        - name: "title"
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: "the lord of the rings"
+          description: The title of the book.
+        - name: "author"
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: "tolkien"
+          description: The author of the book.
+        - name: "subject"
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: "fiction"
+          description: Will find books about the subject. If there are multiple words, AND logic is applied.
+        - name: "person"
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: "Frodo Baggins"
+          description: A person in the book. If there are multiple words, AND logic is applied.
+        - name: "publisher"
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: "harper"
+          description: will looks for any books published by a publisher with "harper" in their name. (Publisher has never been a controlled field in the library world, so you can see we have a ton of variants of this famous publisher in the search facets.)
+        - name: "place"
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: "Mordor"
+          description: Will find books about the place. If there are multiple words, AND logic is applied.
+        - name: "fields"
+          in: query
+          schema:
+            type: string
+            example: key,title,author_name,author_key,place,person,subject
+          description: The fields to get back from solr. Use the special value * to get all fields (although be prepared for a very large response!). All values at - [this link](https://github.com/internetarchive/openlibrary/blob/master/conf/solr/conf/managed-schema#L136-L216)
+            Some fields we can use are isbn,publisher,language,author_name,author_key,person,place,subject,title,key
+        - name: "sort"
+          in: query
+          schema:
+            type: string
+            enum: 
+              - editions
+              - old
+              - new
+              - title
+              - scans
+              - lcc_sort
+              - lcc_sort asc
+              - lcc_sort desc
+              - ddc_sort
+              - ddc_sort asc
+              - ddc_sort desc
+              - key
+              - key asc
+              - key desc
+              - random
+              - random asc
+              - random desc
+              - random.hourly
+              - random.daily
+          description: You can sort the results by various facets such as new, old, random, or key (which sorts as a string, not as the number stored in the string). For a complete list of sorts facets look [here]() (this link goes to a specific commit, be sure to look at the latest one for changes). The default is to sort by relevance.
+        - name: "limit"
+          in: query
+          schema:
+            type: integer
+            default: 5
+            example: 2
+          description: Number of items to fetch
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+            example: 0
+          description: Offset search query by these many items.
+      responses:
+        '200' :
+          description: OK
+
+  /works/{key}.json:
+    get:
+      operationId: getWorkByKey
+      tags:
+        - works
+      summary:
+        A Work is a logical collection of similar Editions. "Fantastic Mr. Fox" could be a Work which contains a Spanish translation edition, or perhaps a 2nd edition which has an additional chapter or corrections.
+      parameters:
+        - name: key
+          in: path
+          required: True
+          schema:
+            type: string
+            example: OL27448W
+      responses:
+        '200' :
+          description: OK
+  
+  /works/{key}/editions.json:
+    get:
+      operationId: getWorkByKeyEditions
+      tags:
+        - works
+      summary:
+        Get the editions of a work.
+      parameters:
+        - name: key
+          in: path
+          required: True
+          schema:
+            type: string
+            example: OL27448W
+        - name: "limit"
+          in: query
+          schema:
+            type: integer
+            default: 5
+            example: 2
+          description: Number of items to fetch
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 1
+            example: 1
+          description: Offset search query by these many items.
+      responses:
+        '200' :
+          description: OK
+
+  /works/{key}/ratings.json:
+    get:
+      operationId: getWorkByKeyRatings
+      tags:
+        - works
+      summary:
+        Get the ratings of a particular piece of work.
+      parameters:
+        - name: key
+          in: path
+          required: True
+          schema:
+            type: string
+            example: OL27516W
+      responses:
+        '200' :
+          description: OK
+
+  /search/authors.json:
+    get:
+      operationId: searchAuthors
+      tags:
+        - author
+        - search
+      summary:
+        Search for Authors.
+      parameters:
+        - name: q
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: J K Rowling
+        - name: fields
+          in: query
+          required: False
+          schema: 
+            type: string
+          example: key,name,birth_date,top_work,work_count,top_subjects,alternate_names
+          description: fields to be fetched, separated by comma. Example - "key,name,birth_date,top_work,work_count,top_subjects,alternate_names"
+        - name: "limit"
+          in: query
+          schema:
+            type: integer
+            default: 1000
+            example: 2
+          description: Number of items to fetch
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+            example: 0
+          description: Offset search query by these many items.
+      responses:
+        '200' :
+          description: OK
+  
+  /authors/{authorKey}.json:
+    get:
+      operationId: getAuthorByKey
+      tags:
+        - author
+      summary:
+        Description for an Author.
+      parameters:
+        - name: authorKey
+          in: path
+          required: True
+          schema: 
+            type: string
+          example: OL26320A
+      responses:
+        '200' :
+          description: OK
+
+  /authors/{authorKey}/works.json:
+    get:
+      operationId: getAuthorByKeyWorks
+      tags:
+        - author
+      summary:
+        Description for an Authors.
+      parameters:
+        - name: authorKey
+          in: path
+          required: True
+          schema: 
+            type: string
+          example: OL26320A
+        - name: "limit"
+          in: query
+          required: False
+          schema:
+            type: integer
+            default: 50
+            example: 2
+          description: Number of items to fetch
+        - name: offset
+          in: query
+          required: False
+          schema:
+            type: integer
+            default: 0
+            example: 0
+          description: Offset search query by these many items.
+          
+      responses:
+        '200' :
+          description: OK
