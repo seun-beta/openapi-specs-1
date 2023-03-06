@@ -96,6 +96,7 @@ tags:
 paths:
   /translate/braille:
     get:
+      operationId: translateToBraille
       description: Translate from English to Braille. This is what you use if you have a braille display. This API translates the English text into characters that a braille display understands and you can feed the translated text directly to the display.
       parameters:
         - description: Text to translate
@@ -140,263 +141,9 @@ paths:
         - X-Funtranslations-Api-Secret: []
       tags:
         - Braille
-  /translate/braille/dots:
-    get:
-      description: Use this to see which dots are enabled for each Braille letters. This is highly educational (to see which dots are enabled) and can potentially drive a non braille display which works on individual dots.
-      parameters:
-        - description: Text to translate
-          format: string
-          in: query
-          name: text
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - application/js
-      responses:
-        '200':
-          description: 200  response
-          examples:
-            application/json: |-
-              {
-                  "success": {
-                      "total": 1
-                  },
-                  "contents": {
-                      "translated": [
-                          "none",
-                          "none",
-                          "6",
-                          "124",
-                          "136",
-                          "1345",
-                          "none",
-                          "6",
-                          "2345",
-                          "1235",
-                          "1",
-                          "1345",
-                          "234",
-                          "123",
-                          "6",
-                          "1345",
-                          "234",
-                          "none",
-                          "125",
-                          "1",
-                          "234",
-                          "none",
-                          "5",
-                          "234",
-                          "1456",
-                          "346",
-                          "none",
-                          "123456",
-                          "\r",
-                          "\n",
-                          "5",
-                          "15",
-                          "13456",
-                          "5",
-                          "135",
-                          "256",
-                          "\r",
-                          "\n"
-                      ],
-                      "text": "Fun Translations has something for everyone.",
-                      "translation": {
-                          "source": "english",
-                          "destination": "braille dots"
-                      }
-                  }
-              }
-        '401':
-          description: 401  response
-          examples:
-            application/json: |-
-              {
-                  "error": {
-                      "code": 401,
-                      "message": "Unauthorized"
-                  }
-              }        
-      security:
-        - X-Funtranslations-Api-Secret: []
-      tags:
-        - Braille
-  /translate/braille/html:
-    get:
-      description: Translate from English to Braille Image characters. This is probably what you want to use if you are displaying braille in a browser.
-      parameters:
-        - description: Text to translate
-          format: string
-          in: query
-          name: text
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - application/js
-      responses:
-        '200':
-          description: 200  response
-          examples:
-            application/json: |-
-              {
-                  "success": {
-                      "total": 1
-                  },
-                  "contents": {
-                      "translated": [
-                          "&#x2800;",
-                          "&#x2800;",
-                          "&#x2820;",
-                          "&#x280b;",
-                          "&#x2825;",
-                          "&#x281d;",
-                          "&#x2800;",
-                          "&#x2820;",
-                          "&#x281e;",
-                          "&#x2817;",
-                          "&#x2801;",
-                          "&#x281d;",
-                          "&#x280e;",
-                          "&#x2807;",
-                          "&#x2820;",
-                          "&#x281d;",
-                          "&#x280e;",
-                          "&#x2800;",
-                          "&#x2813;",
-                          "&#x2801;",
-                          "&#x280e;",
-                          "&#x2800;",
-                          "&#x2810;",
-                          "&#x280e;",
-                          "&#x2839;",
-                          "&#x282c;",
-                          "&#x2800;",
-                          "&#x283f;",
-                          "\r",
-                          "\n",
-                          "&#x2810;",
-                          "&#x2811;",
-                          "&#x283d;",
-                          "&#x2810;",
-                          "&#x2815;",
-                          "&#x2832;",
-                          "\r",
-                          "\n"
-                      ],
-                      "text": "Fun Translations has something for everyone.",
-                      "translation": {
-                          "source": "english",
-                          "destination": "braille html"
-                      }
-                  }
-              }
-        '401':
-          description: 401  response
-          examples:
-            application/json: |-
-              {
-                  "error": {
-                      "code": 401,
-                      "message": "Unauthorized"
-                  }
-              }                                            
-      security:
-        - X-Funtranslations-Api-Secret: []
-      tags:
-        - Braille
-  /translate/braille/image:
-    get:
-      description: Translate from English to Braille image characters. This is probably what you want to use if you are displaying braille in a browser.
-      parameters:
-        - description: Text to translate
-          format: string
-          in: query
-          name: text
-          required: true
-          type: string
-      produces:
-        - application/json
-        - application/xml
-        - application/js
-      responses:
-        '200':
-          description: 200  response
-          examples:
-            application/json: |-
-              {
-                  "success": {
-                      "total": 1
-                  },
-                  "contents": {
-                      "translated": [
-                          "<img src='http://funtranslations.com/img/braille/char/00.gif' alt='char 0x2800 = &#x2800;' title='char 0x2800 = &#x2800;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/00.gif' alt='char 0x2800 = &#x2800;' title='char 0x2800 = &#x2800;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/20.gif' alt='char 0x2820 = &#x2820;' title='char 0x2820 = &#x2820;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/0b.gif' alt='char 0x280b = &#x280b;' title='char 0x280b = &#x280b;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/25.gif' alt='char 0x2825 = &#x2825;' title='char 0x2825 = &#x2825;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/1d.gif' alt='char 0x281d = &#x281d;' title='char 0x281d = &#x281d;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/00.gif' alt='char 0x2800 = &#x2800;' title='char 0x2800 = &#x2800;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/20.gif' alt='char 0x2820 = &#x2820;' title='char 0x2820 = &#x2820;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/1e.gif' alt='char 0x281e = &#x281e;' title='char 0x281e = &#x281e;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/17.gif' alt='char 0x2817 = &#x2817;' title='char 0x2817 = &#x2817;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/01.gif' alt='char 0x2801 = &#x2801;' title='char 0x2801 = &#x2801;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/1d.gif' alt='char 0x281d = &#x281d;' title='char 0x281d = &#x281d;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/0e.gif' alt='char 0x280e = &#x280e;' title='char 0x280e = &#x280e;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/07.gif' alt='char 0x2807 = &#x2807;' title='char 0x2807 = &#x2807;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/20.gif' alt='char 0x2820 = &#x2820;' title='char 0x2820 = &#x2820;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/1d.gif' alt='char 0x281d = &#x281d;' title='char 0x281d = &#x281d;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/0e.gif' alt='char 0x280e = &#x280e;' title='char 0x280e = &#x280e;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/00.gif' alt='char 0x2800 = &#x2800;' title='char 0x2800 = &#x2800;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/13.gif' alt='char 0x2813 = &#x2813;' title='char 0x2813 = &#x2813;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/01.gif' alt='char 0x2801 = &#x2801;' title='char 0x2801 = &#x2801;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/0e.gif' alt='char 0x280e = &#x280e;' title='char 0x280e = &#x280e;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/00.gif' alt='char 0x2800 = &#x2800;' title='char 0x2800 = &#x2800;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/10.gif' alt='char 0x2810 = &#x2810;' title='char 0x2810 = &#x2810;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/0e.gif' alt='char 0x280e = &#x280e;' title='char 0x280e = &#x280e;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/39.gif' alt='char 0x2839 = &#x2839;' title='char 0x2839 = &#x2839;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/2c.gif' alt='char 0x282c = &#x282c;' title='char 0x282c = &#x282c;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/00.gif' alt='char 0x2800 = &#x2800;' title='char 0x2800 = &#x2800;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/3f.gif' alt='char 0x283f = &#x283f;' title='char 0x283f = &#x283f;' class='img-braille-char'>",
-                          "\r",
-                          "\n",
-                          "<img src='http://funtranslations.com/img/braille/char/10.gif' alt='char 0x2810 = &#x2810;' title='char 0x2810 = &#x2810;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/11.gif' alt='char 0x2811 = &#x2811;' title='char 0x2811 = &#x2811;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/3d.gif' alt='char 0x283d = &#x283d;' title='char 0x283d = &#x283d;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/10.gif' alt='char 0x2810 = &#x2810;' title='char 0x2810 = &#x2810;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/15.gif' alt='char 0x2815 = &#x2815;' title='char 0x2815 = &#x2815;' class='img-braille-char'>",
-                          "<img src='http://funtranslations.com/img/braille/char/32.gif' alt='char 0x2832 = &#x2832;' title='char 0x2832 = &#x2832;' class='img-braille-char'>",
-                          "\r",
-                          "\n"
-                      ],
-                      "text": "Fun Translations has something for everyone.",
-                      "translation": {
-                          "source": "english",
-                          "destination": "braille images"
-                      }
-                  }
-              }
-        '401':
-          description: 401  response
-          examples:
-            application/json: |-
-              {
-                  "error": {
-                      "code": 401,
-                      "message": "Unauthorized"
-                  }
-              } 
-      security:
-        - X-Funtranslations-Api-Secret: []
-      tags:
-        - Braille
   /translate/braille/unicode:
     get:
+      operationId: translateToBrailleUnicode
       description: Translate from English to Braille Unicode characters.
       parameters:
         - description: Text to translate
@@ -482,6 +229,7 @@ paths:
         - Braille
   /translate/brooklyn:
     get:
+      operationId: translateToBrooklynSpeak
       description: Translate from English to Brooklyn Speak.
       parameters:
         - description: Text to translate
@@ -525,6 +273,7 @@ paths:
         - Dialect
   /translate/chef:
     get:
+      operationId: translateToSwedishChefSpeak
       description: Translate from English to Swedish Chef speak.
       parameters:
         - description: Text to translate
@@ -568,6 +317,7 @@ paths:
         - Characters
   /translate/cheunh:
     get:
+      operationId: translateToStarWarsCheunh
       description: Translate from English to Starwars cheunh.
       parameters:
         - description: Text to translate
@@ -611,6 +361,7 @@ paths:
         - Starwars
   /translate/cockney:
     get:
+      operationId: translateToCockneySpeak
       description: Translate from English to Cockney Speak.
       parameters:
         - description: Text to translate
@@ -654,6 +405,7 @@ paths:
         - Dialect
   /translate/dolan:
     get:
+      operationId: translateDorianSpeak
       description: Translate from English to Dolan Speak.
       parameters:
         - description: Text to translate
@@ -697,6 +449,7 @@ paths:
         - Characters
   /translate/dothraki:
     get:
+      operationId: translateToDothraki
       description: Translate from English to Dothraki.
       parameters:
         - description: Text to translate
@@ -740,6 +493,7 @@ paths:
         - Game Of Thrones
   /translate/ermahgerd:
     get:
+      operationId: translateToERMAHGERD
       description: Translate from English to ERMAHGERD.
       parameters:
         - description: Text to translate
@@ -783,6 +537,7 @@ paths:
         - Internet FAD
   /translate/ferblatin:
     get:
+      operationId: translateToFerbLatin
       description: Translate from English to Ferb Latin.
       parameters:
         - description: Text to translate
@@ -826,6 +581,7 @@ paths:
         - Characters
   /translate/fudd:
     get:
+      operationId: translateToFuddSpeak
       description: Translate from English to Fudd Speak.
       parameters:
         - description: Text to translate
@@ -869,6 +625,7 @@ paths:
         - Characters
   /translate/gungan:
     get:
+      operationId: translateToStarWarsGungan
       description: Translate from English to Starwars Gungan Language.
       parameters:
         - description: Text to translate
@@ -912,6 +669,7 @@ paths:
         - Starwars
   /translate/huttese:
     get:
+      operationId: translateToStarWarsHuttese
       description: Translate from English to Starwars Huttese Language.
       parameters:
         - description: Text to translate
@@ -955,6 +713,7 @@ paths:
         - Starwars
   /translate/jive:
     get:
+      operationId: translateToJiveSpeak
       description: Translate from normal English to Jive Speak.
       parameters:
         - description: Text to translate
@@ -998,6 +757,7 @@ paths:
         - Dialect
   /translate/klingon:
     get:
+      operationId: translateToStarTrekKlingon
       description: Translate from English to Startrek Klingon Language.
       parameters:
         - description: Text to translate
@@ -1041,6 +801,7 @@ paths:
         - Startrek
   /translate/mandalorian:
     get:
+      operationId: translateToStarWarsMandalorian
       description: Translate from English to Starwars Mandalorian Language.
       parameters:
         - description: Text to translate
@@ -1084,6 +845,7 @@ paths:
         - Starwars
   /translate/minion:
     get:
+      operationId: translateToMinionSpeak
       description: Translate from English to Minion Speak.
       parameters:
         - description: Text to translate
@@ -1127,6 +889,7 @@ paths:
         - Characters
   /translate/morse:
     get:
+      operationId: translateToMorseCode
       description: Translate from English to morse code.
       parameters:
         - description: Text to translate
@@ -1168,70 +931,9 @@ paths:
         - X-Funtranslations-Api-Secret: []
       tags:
         - Morse
-  /translate/morse/audio:
-    get:
-      description: Translate from English to morse code and get the result as an audio file.
-      parameters:
-        - description: Text to translate
-          format: string
-          in: query
-          name: text
-          required: true
-          type: string
-        - description: Audio Speed (Words/Minute)
-          format: integer
-          in: query
-          name: speed
-          required: true
-          type: integer
-        - description: Audio Tone Frequency(Hz)
-          format: integer
-          in: query
-          name: tone
-          required: true
-          type: integer
-      produces:
-        - application/json
-        - application/xml
-        - application/js
-      responses:
-        '200':
-          description: 200  response
-          examples:
-            application/json: |-
-              {
-                  "success": {
-                      "total": 1
-                  },
-                  "contents": {
-                      "translated": {
-                          "audio": "data:audio/wave;base64,UklGRjiBCQBXQVZFZm1...
-                      },
-                      "text": "Morse code is dit and dash",
-                      "speed": "5 WPM",
-                      "tone": "700 Hz",
-                      "translation": {
-                          "source": "english",
-                          "destination": "morse audio"
-                      }
-                  }
-              }
-        '401':
-          description: 401  response
-          examples:
-            application/json: |-
-              {
-                  "error": {
-                      "code": 401,
-                      "message": "Unauthorized"
-                  }
-              }
-      security:
-        - X-Funtranslations-Api-Secret: []
-      tags:
-        - Morse
   /translate/morse2english:
     get:
+      operationId: translateMorseCodeToEnglish
       description: Translate from Morse code to English.
       parameters:
         - description: Text to translate
@@ -1278,6 +980,7 @@ paths:
         - Morse
   /translate/oldenglish:
     get:
+      operationId: translateToOldEnglish
       description: Translate from English to Old English.
       parameters:
         - description: Text to translate
@@ -1321,6 +1024,7 @@ paths:
         - English
   /translate/piglatin:
     get:
+      operationId: translateToPigLatin
       description: Translate from English to Pig Latin.
       parameters:
         - description: Text to translate
@@ -1364,6 +1068,7 @@ paths:
         - PigLatin
   /translate/pirate:
     get:
+      operationId: translateToPirateSpeak
       description: Translate from English to Pirate Speak.
       parameters:
         - description: Text to translate
@@ -1407,6 +1112,7 @@ paths:
         - Characters
   /translate/quneya:
     get:
+      operationId: translateToElvishQuenya
       description: Translate from English to Elvish Quenya Language.
       parameters:
         - description: Text to translate
@@ -1450,6 +1156,7 @@ paths:
         - Elvish
   /translate/shakespeare:
     get:
+      operationId: translateToShakespeareEnglish
       description: Translate from English to Shakespeare English.
       parameters:
         - description: Text to translate
@@ -1493,6 +1200,7 @@ paths:
         - English
   /translate/sindarin:
     get:
+      operationId: translateToElvishSindarin
       description: Translate from English to Elvish Sindarin Language.
       parameters:
         - description: Text to translate
@@ -1536,6 +1244,7 @@ paths:
         - Elvish
   /translate/sith:
     get:
+      operationId: translateToSithSpeak
       description: Translate from English to Sith Speak.
       parameters:
         - description: Text to translate
@@ -1579,6 +1288,7 @@ paths:
         - Starwars
   /translate/uk2us:
     get:
+      operationId: translateFromUkEngToUsEng
       description: Translate from UK English to US English.
       parameters:
         - description: Text to translate
@@ -1622,6 +1332,7 @@ paths:
         - English
   /translate/us2uk:
     get:
+      operationId: translateUSEnglishToUKEnglish
       description: Translate from US English to UK English.
       parameters:
         - description: Text to translate
@@ -1665,6 +1376,7 @@ paths:
         - English
   /translate/valspeak:
     get:
+      operationId: translateToValleySpeak
       description: Translate from English to Valley Speak.
       parameters:
         - description: Text to translate
@@ -1708,6 +1420,7 @@ paths:
         - Dialect
   /translate/valyrian:
     get:
+      operationId: translateToValyrian
       description: Translate from English to Valyrian.
       parameters:
         - description: Text to translate
@@ -1751,6 +1464,7 @@ paths:
         - Game Of Thrones
   /translate/vulcan:
     get:
+      operationId: translateToStarTrekVulcan
       description: Translate from English to Startrek Vulcan Language.
       parameters:
         - description: Text to translate
@@ -1794,6 +1508,7 @@ paths:
         - Startrek
   /translate/yoda:
     get:
+      operationId: translateToYodaSpeak
       description: Translate from English to Yoda Speak.
       parameters:
         - description: Text to translate
