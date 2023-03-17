@@ -78,7 +78,7 @@ tags:
     description: Find out more
     url: http://funtranslations.com/api/minion
 paths:
-  /translate/braille:
+  translate/braille:
     get:
       tags:
       - Braille
@@ -122,7 +122,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}    "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/braille/unicode:
+  translate/braille/unicode:
     get:
       tags:
       - Braille
@@ -202,7 +202,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}    "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/brooklyn:
+  translate/brooklyn:
     get:
       tags:
       - Dialect
@@ -240,7 +240,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/chef:
+  translate/chef:
     get:
       tags:
       - Characters
@@ -278,7 +278,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/cheunh:
+  translate/cheunh:
     get:
       tags:
       - Starwars
@@ -316,7 +316,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}   "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/cockney:
+  translate/cockney:
     get:
       tags:
       - Dialect
@@ -354,7 +354,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/dolan:
+  translate/dolan:
     get:
       tags:
       - Characters
@@ -397,7 +397,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/dothraki:
+  translate/dothraki:
     get:
       tags:
       - Game Of Thrones
@@ -435,7 +435,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/ermahgerd:
+  translate/ermahgerd:
     get:
       tags:
       - Internet FAD
@@ -474,7 +474,7 @@ paths:
                 \                                           "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/ferblatin:
+  translate/ferblatin:
     get:
       tags:
       - Characters
@@ -512,7 +512,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}            "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/fudd:
+  translate/fudd:
     get:
       tags:
       - Characters
@@ -550,7 +550,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}                   "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/gungan:
+  translate/gungan:
     get:
       tags:
       - Starwars
@@ -588,7 +588,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/huttese:
+  translate/huttese:
     get:
       tags:
       - Starwars
@@ -631,7 +631,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/jive:
+  translate/jive:
     get:
       tags:
       - Dialect
@@ -669,7 +669,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}       "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/klingon:
+  translate/klingon:
     get:
       tags:
       - Startrek
@@ -712,7 +712,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/mandalorian:
+  translate/mandalorian:
     get:
       tags:
       - Starwars
@@ -755,7 +755,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/minion:
+  translate/minion:
     get:
       tags:
       - Characters
@@ -793,7 +793,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}     "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/morse:
+  translate/morse:
     get:
       tags:
       - Morse
@@ -836,7 +836,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/morse2english:
+  translate/morse2english:
     get:
       tags:
       - Morse
@@ -882,7 +882,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/oldenglish:
+  translate/oldenglish:
     get:
       tags:
       - English
@@ -920,7 +920,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}  "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/piglatin:
+  translate/piglatin:
     get:
       tags:
       - PigLatin
@@ -958,7 +958,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}              "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/pirate:
+  translate/pirate:
     get:
       tags:
       - Characters
@@ -996,7 +996,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/quneya:
+  translate/quneya:
     get:
       tags:
       - Elvish
@@ -1034,7 +1034,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}                       "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/shakespeare:
+  translate/shakespeare:
     get:
       tags:
       - English
@@ -1072,7 +1072,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/sindarin:
+  translate/sindarin:
     get:
       tags:
       - Elvish
@@ -1110,7 +1110,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}  "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/sith:
+  translate/sith:
     get:
       tags:
       - Starwars
@@ -1153,7 +1153,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/uk2us:
+  translate/uk2us:
     get:
       tags:
       - English
@@ -1192,7 +1192,7 @@ paths:
                 \    "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/us2uk:
+  translate/us2uk:
     get:
       tags:
       - English
@@ -1230,7 +1230,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}  "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/valspeak:
+  translate/valspeak:
     get:
       tags:
       - Dialect
@@ -1268,7 +1268,7 @@ paths:
                 : \"Unauthorized\"\n    }\n} "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/valyrian:
+  translate/valyrian:
     get:
       tags:
       - Game Of Thrones
@@ -1311,7 +1311,7 @@ paths:
                 }
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/vulcan:
+  translate/vulcan:
     get:
       tags:
       - Startrek
@@ -1349,7 +1349,7 @@ paths:
                 : \"Unauthorized\"\n    }\n}  "
       security:
       - X-Funtranslations-Api-Secret: []
-  /translate/yoda:
+  translate/yoda:
     get:
       tags:
       - Starwars
