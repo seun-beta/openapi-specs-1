@@ -1,0 +1,1395 @@
+openapi: 3.0.1
+info:
+  title: FunTranslations API
+  description: "Funtranslations API gives access to the full set of translations available\
+    \ at funtranslations.com so that you can integrate them in your workflow or an\
+    \ app. [Click here to get details and subscribe](http://funtranslations.com/api)\
+    \ . Here are the individual API links:\n\n  ## Morse code API ##\n  Morse code\
+    \ conversion API on the cloud. Translate to and from Morse Code.[Click here to\
+    \ subscribe](http://funtranslations.com/api/morse)\n  ## Braille API ##\n  Braille\
+    \ conversion API on the cloud. Translate to Braille and get Braille results suitable\
+    \ for many display types.[Click here to subscribe](http://funtranslations.com/api/braille)\
+    \     \n  ## Starwars Translation API ##\n  Ever wonder how to talk like Yoda?\
+    \ Well, use our API and let your APP/webpage speak like Yoda too.[Click here to\
+    \ subscribe](http://funtranslations.com/api/yoda)  \n  \n  Sith Translator API.\
+    \ [Click here to subscribe](http://funtranslations.com/api/sith) \n  \n  Cheunh\
+    \ Translator API. [Click here to subscribe](http://funtranslations.com/api/cheunh)\
+    \ \n  \n  Huttese Translator API. [Click here to subscribe](http://funtranslations.com/api/huttese)\n\
+    \  \n  Mandalorian Translator API. [Click here to subscribe](http://funtranslations.com/api/mandalorian)\n\
+    \  \n  Gungan Translator API. [Click here to subscribe](http://funtranslations.com/api/gungan)\n\
+    \  \n  ## Pirate Speak Translation API ##\n  Ahoy, matey. Let's get those land\
+    \ lubbers speak our tounge too! Our evergreen pirate speak tranlsator API.[Click\
+    \ here to subscribe](http://funtranslations.com/api/pirate) \n  ## Valley Speak\
+    \ Translation API ##\n  Our throwback Valspeak translations API.[Click here to\
+    \ subscribe](http://funtranslations.com/api/valspeak)    \n  ## Minion Speak Translation\
+    \ API ##\n  Our evil master following minion speak translations API.[Click here\
+    \ to subscribe](http://funtranslations.com/api/minion)     \n"
+  termsOfService: https://funtranslations.com/terms
+  contact:
+    name: Fun Translations
+    url: http://funtranslations.com/
+  version: "2.3"
+  x-apisguru-categories:
+  - text
+  x-logo:
+    url: https://api.apis.guru/v2/cache/logo/https_twitter.com_funtranslate_profile_image.png
+  x-origin:
+  - format: swagger
+    url: http://api.funtranslations.com/yaml/funtranslations.yaml
+    version: "2.0"
+  x-providerName: funtranslations.com
+  x-serviceName: index
+servers:
+- url: https://api.funtranslations.com
+tags:
+- name: Morse
+  description: Morse Code Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/morse
+- name: Starwars
+  description: Starwars Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/yoda
+- name: Startrek
+  description: Startrek Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/yoda
+- name: Pirate
+  description: Pirate Speak Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/pirate
+- name: Valspeak
+  description: Valley Speak Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/valspeak
+- name: Braille
+  description: Braille Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/braille
+- name: Minion
+  description: Minion Translation API
+  externalDocs:
+    description: Find out more
+    url: http://funtranslations.com/api/minion
+paths:
+  /translate/braille:
+    get:
+      tags:
+      - Braille
+      description: Translate from English to Braille. This is what you use if you
+        have a braille display. This API translates the English text into characters
+        that a braille display understands and you can feed the translated text directly
+        to the display.
+      operationId: translateToBraille
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "success": {
+                        "total": 1
+                    },
+                    "contents": {
+                        "translated": "  ,fun ,transl,ns has \"s?+ =\r\n\"ey\"o4\r\n",
+                        "text": "Fun Translations has something for everyone.",
+                        "translation": {
+                            "source": "english",
+                            "destination": "braille display"
+                        }
+                    }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}    "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/braille/unicode:
+    get:
+      tags:
+      - Braille
+      description: Translate from English to Braille Unicode characters.
+      operationId: translateToBrailleUnicode
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "success": {
+                        "total": 1
+                    },
+                    "contents": {
+                        "translated": [
+                            "⠀",
+                            "⠀",
+                            "⠠",
+                            "⠋",
+                            "⠥",
+                            "⠝",
+                            "⠀",
+                            "⠠",
+                            "⠞",
+                            "⠗",
+                            "⠁",
+                            "⠝",
+                            "⠎",
+                            "⠇",
+                            "⠠",
+                            "⠝",
+                            "⠎",
+                            "⠀",
+                            "⠓",
+                            "⠁",
+                            "⠎",
+                            "⠀",
+                            "⠐",
+                            "⠎",
+                            "⠹",
+                            "⠬",
+                            "⠀",
+                            "⠿",
+                            "\r",
+                            "\n",
+                            "⠐",
+                            "⠑",
+                            "⠽",
+                            "⠐",
+                            "⠕",
+                            "⠲",
+                            "\r",
+                            "\n"
+                        ],
+                        "text": "Fun Translations has something for everyone.",
+                        "translation": {
+                            "source": "english",
+                            "destination": "braille unicode"
+                        }
+                    }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}    "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/brooklyn:
+    get:
+      tags:
+      - Dialect
+      description: Translate from English to Brooklyn Speak.
+      operationId: translateToBrooklynSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Where dis is lots of love dere is lots of fightin'.",
+                    "text": "Where this is lots of love there is lots of fighting.",
+                    "translation": "brooklyn"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/chef:
+    get:
+      tags:
+      - Characters
+      description: Translate from English to Swedish Chef speak.
+      operationId: translateToSwedishChefSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Cuokeeng is fuon vhee-a yuou du it vit a cheff. Bork, Bork, Bork!",
+                    "text": "Cooking is fun when you do it with a chef",
+                    "translation": "chef"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/cheunh:
+    get:
+      tags:
+      - Starwars
+      description: Translate from English to Starwars cheunh.
+      operationId: translateToStarWarsCheunh
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Ch'ah went ch'at coruscant vea was bav parsec ch'itt'suvrecah!",
+                    "text": "I went to coruscant which was ten parsec away!",
+                    "translation": "cheunh"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}   "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/cockney:
+    get:
+      tags:
+      - Dialect
+      description: Translate from English to Cockney Speak.
+      operationId: translateToCockneySpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "I'm wee busy wiv the bleedin' bike, but I luv ter eat the chuffin' food.",
+                    "text": "I'm little busy with the bike, but I love to eat the food.",
+                    "translation": "cockney"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/dolan:
+    get:
+      tags:
+      - Characters
+      description: Translate from English to Dolan Speak.
+      operationId: translateDorianSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Ai hav 2 gievn prezintashun 2 ppl.",
+                    "text": "I have to give a presentation to people.",
+                    "translation": "dolan"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/dothraki:
+    get:
+      tags:
+      - Game Of Thrones
+      description: Translate from English to Dothraki.
+      operationId: translateToDothraki
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Hash yeri ray tih erinak’s zhavorsa?",
+                    "text": "Have you seen my lady’s dragon?",
+                    "translation": "dothraki"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/ermahgerd:
+    get:
+      tags:
+      - Internet FAD
+      description: Translate from English to ERMAHGERD.
+      operationId: translateToERMAHGERD
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": " ER MAH GERD THERS ERS GERVIN MAH GERSERBERMPS",
+                    "text": "Oh my god! This is giving me goosebumps!",
+                    "translation": "ermahgerd"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}                                     \
+                \                                           "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/ferblatin:
+    get:
+      tags:
+      - Characters
+      description: Translate from English to Ferb Latin.
+      operationId: translateToFerbLatin
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "ell-Werb, if by hat-terb ou-yerb ean-merb we hould-serb reate-cerb a hole-werb ew-nerb orm-ferb of ommunication-cerb, hen-terb I couldn't gree-aerb more. ",
+                    "text": "Well, if by that you mean we should create a whole new form of communication, then I couldn't agree more.",
+                    "translation": "ferblatin"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}            "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/fudd:
+    get:
+      tags:
+      - Characters
+      description: Translate from English to Fudd Speak.
+      operationId: translateToFuddSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Be vewy vewy qwiet. I am hunting wabbits.",
+                    "text": "Be very very quiet. I am hunting rabbits.",
+                    "translation": "fudd"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}                   "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/gungan:
+    get:
+      tags:
+      - Starwars
+      description: Translate from English to Starwars Gungan Language.
+      operationId: translateToStarWarsGungan
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Yousa came to mesa home and mesa said okeeday!",
+                    "text": "You came to my home and I said okay!",
+                    "translation": "gungan"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/huttese:
+    get:
+      tags:
+      - Starwars
+      description: Translate from English to Starwars Huttese Language.
+      operationId: translateToStarWarsHuttese
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Did u stuka doe murishani?",
+                    "text": "Did you see the bounty hunter?",
+                    "translation": "huttese"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/jive:
+    get:
+      tags:
+      - Dialect
+      description: Translate from normal English to Jive Speak.
+      operationId: translateToJiveSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "I likes da damn boy across de street.  Right On!",
+                    "text": "I like the boy across the street!",
+                    "translation": "jive"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}       "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/klingon:
+    get:
+      tags:
+      - Startrek
+      description: Translate from English to Startrek Klingon Language.
+      operationId: translateToStarTrekKlingon
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "'iv do tlhih baj? Chah are going to baq tlhih.",
+                    "text": "Who do you work for? They are going to terminate you.",
+                    "translation": "klingon"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/mandalorian:
+    get:
+      tags:
+      - Starwars
+      description: Translate from English to Starwars Mandalorian Language.
+      operationId: translateToStarWarsMandalorian
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Ni'd guuror a pint cuyir gal",
+                    "text": "I'd like a pint of ale",
+                    "translation": "mandalorian"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/minion:
+    get:
+      tags:
+      - Characters
+      description: Translate from English to Minion Speak.
+      operationId: translateToMinionSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Bello, ka am con a banana!",
+                    "text": "Hello, I am hungry!",
+                    "translation": "minion"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}     "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/morse:
+    get:
+      tags:
+      - Morse
+      description: Translate from English to morse code.
+      operationId: translateToMorseCode
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "-- --- .-. ... .     -.-. --- -.. .     .. ...     .-     -.. .. -     .- -. -..     -.. .- .... ",
+                    "text": "Morse code is a dit and dah",
+                    "translation": "morse"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/morse2english:
+    get:
+      tags:
+      - Morse
+      description: Translate from Morse code to English.
+      operationId: translateMorseCodeToEnglish
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "success": {
+                        "total": 1
+                    },
+                    "contents": {
+                        "translated": "morse    code    is    a    dit    and    dah ",
+                        "text": "-- --- .-. ... .     -.-. --- -.. .     .. ...     .-     -.. .. -     .- -. -..     -.. .- .... ",
+                        "translation": {
+                            "source": "morse",
+                            "destination": "english"
+                        }
+                    }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/oldenglish:
+    get:
+      tags:
+      - English
+      description: Translate from English to Old English.
+      operationId: translateToOldEnglish
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": " {Mr}. {Tim} {ate} bâm innor feorm, for ðý ðe {unfortunately} {what} swilc {ate} sw¯ær of hê oðcwelan.",
+                    "text": "Mr. Tim ate a hearty meal, but unfortunately what he ate made him die.",
+                    "translation": "oldenglish"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}  "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/piglatin:
+    get:
+      tags:
+      - PigLatin
+      description: Translate from English to Pig Latin.
+      operationId: translateToPigLatin
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "ig-Pay atin-Lay is-way used-way in-way ools-schay o-tay each-tay anguage-lay onstructs-cay. ",
+                    "text": "Pig Latin is used in schools to teach language constructs.",
+                    "translation": "piglatin"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}              "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/pirate:
+    get:
+      tags:
+      - Characters
+      description: Translate from English to Pirate Speak.
+      operationId: translateToPirateSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Ahoy matey, and a bottle of rum! me dear ol' mum, bless her black soul goes with me t' th' briny deep.",
+                    "text": "Hello sir! my mother goes with me to the ocean.",
+                    "translation": "pirate"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/quneya:
+    get:
+      tags:
+      - Elvish
+      description: Translate from English to Elvish Quenya Language.
+      operationId: translateToElvishQuenya
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Ni am Arwen - ni've túl ana help tye. Lar- mime óma. Túl at- ana i kal.",
+                    "text": "I am Arwen - I've come to help you. Hear my voice... Come back to the light.",
+                    "translation": "quenya"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}                       "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/shakespeare:
+    get:
+      tags:
+      - English
+      description: Translate from English to Shakespeare English.
+      operationId: translateToShakespeareEnglish
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Thou did giveth Mr. Tim a hearty meal,  but unfortunately what he englut did maketh him kicketh the bucket.",
+                    "text": "You gave Mr. Tim a hearty meal, but unfortunately what he ate made him die.",
+                    "translation": "shakespeare"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/sindarin:
+    get:
+      tags:
+      - Elvish
+      description: Translate from English to Elvish Sindarin Language.
+      operationId: translateToElvishSindarin
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "I ambar na- changed; im tur- feel ha in i nen,  im tur- feel ha in i coe,  im tur- smell ha in i gwilith.",
+                    "text": "The world is changed; I can feel it in the water, I can feel it in the earth, I can smell it in the air.",
+                    "translation": "sindarin"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}  "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/sith:
+    get:
+      tags:
+      - Starwars
+      description: Translate from English to Sith Speak.
+      operationId: translateToSithSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Nu went kia coruscant which meo ten parsekas salini!",
+                    "text": "I went to coruscant which was ten parsec away!",
+                    "translation": "sith"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/uk2us:
+    get:
+      tags:
+      - English
+      description: Translate from UK English to US English.
+      operationId: translateFromUkEngToUsEng
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "The artifacts of the behavioral elements canceled the commercialized monotone.",
+                    "text": "The artefacts of the behavioural elements cancelled the commercialised monotone.",
+                    "translation": "uk2us"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}                                     \
+                \    "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/us2uk:
+    get:
+      tags:
+      - English
+      description: Translate from US English to UK English.
+      operationId: translateUSEnglishToUKEnglish
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "He agonised over the ageing armoured cars.",
+                    "text": "He agonized over the aging armored cars.",
+                    "translation": "us2uk"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}  "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/valspeak:
+    get:
+      tags:
+      - Dialect
+      description: Translate from English to Valley Speak.
+      operationId: translateToValleySpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Bitchin' Mornin'. Come on nerd, fer shure just sayin'",
+                    "text": "Good Morning. Come on man, just saying!",
+                    "translation": "valspeak"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/valyrian:
+    get:
+      tags:
+      - Game Of Thrones
+      description: Translate from English to Valyrian.
+      operationId: translateToValyrian
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Nyke Daenerys jelmāzmo hen se lentor targārien,  hen se ānogar hen uēpa valyrio. Valyrīha iksos issa muñnykeā ēngos.",
+                    "text": "I am Daenerys Stormborn of the House Targaryen, of the blood of Old Valyria. Valyrian is my mother tongue.",
+                    "translation": "valyrian"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: |-
+                {
+                    "error": {
+                        "code": 401,
+                        "message": "Unauthorized"
+                    }
+                }
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/vulcan:
+    get:
+      tags:
+      - Startrek
+      description: Translate from English to Startrek Vulcan Language.
+      operationId: translateToStarTrekVulcan
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Lau I leralmin ik I ma ri thoroughly tizh-tor serving k' komihn? I talal ish-veh illogic heh duhik zherka wuh ek'kayik ornat.",
+                    "text": "May I say that I have not thoroughly enjoyed serving with humans? I find their illogic and foolish emotions a constant irritant.",
+                    "translation": "vulcan"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n}  "
+      security:
+      - X-Funtranslations-Api-Secret: []
+  /translate/yoda:
+    get:
+      tags:
+      - Starwars
+      description: Translate from English to Yoda Speak.
+      operationId: translateToYodaSpeak
+      parameters:
+      - name: text
+        in: query
+        description: Text to translate
+        required: true
+        schema:
+          type: string
+          format: string
+      responses:
+        200:
+          description: 200  response
+          content:
+            application/json:
+              example: |-
+                {
+                  "success": {
+                    "total": 1
+                  },
+                  "contents": {
+                    "translated": "Lost a planet,  master obiwan has. ",
+                    "text": "Master Obiwan has lost a planet.",
+                    "translation": "yoda"
+                  }
+                }
+        401:
+          description: 401  response
+          content:
+            application/json:
+              example: "{\n    \"error\": {\n        \"code\": 401,\n        \"message\"\
+                : \"Unauthorized\"\n    }\n} "
+      security:
+      - X-Funtranslations-Api-Secret: []
+components:
+  securitySchemes:
+    X-Funtranslations-Api-Secret:
+      type: apiKey
+      name: X-Funtranslations-Api-Secret
+      in: header
