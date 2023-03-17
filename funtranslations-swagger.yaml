@@ -2,6 +2,7 @@ swagger: '2.0'
 schemes:
   - https
 host: api.funtranslations.com
+basePath: /
 info:
   contact:
     name: Fun Translations
