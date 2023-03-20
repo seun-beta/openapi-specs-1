@@ -1,0 +1,879 @@
+openapi: 3.0.1
+info:
+  title: ChemRxiv Public API Documentation
+  description: This is the documentation for the ChemRxiv public API
+  version: 0.0.84
+servers:
+  - url: 'https://chemrxiv.org/engage/chemrxiv'
+paths:
+  /public-api/v1/categories:
+    get:
+      summary: Get all categories with metadata
+      description: >-
+        Endpoint to get all available categories with total number of categories
+        and category metadata such as name, id, description, parentId and number
+        of published preprints in the category.
+      operationId: getPublicapiV1Categories
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Result'
+        '400':
+          description: Bad request
+          content: {}
+        '429':
+          description: >-
+            Too Many Requests, please throttle or talk to us if you think
+            there's a problem
+          content: {}
+  /public-api/v1/items:
+    get:
+      summary: Search items
+      description: |2-
+            Search for items passing search term and filters. In the QUERY PARAMETERS section you will find all parameters that you can add to query.
+            
+            Example of Query with parameters
+            
+            1. /public-api/v1/items?term="water flow"&searchDateFrom=2020-01-01T00:00:00.000Z
+            2. /public-api/v1/items?sort=VIEWS_COUNT_DESC&limit=5
+            3. /public-api/v1/items?subjectIds=123456
+      operationId: getPublicapiV1Items
+      parameters:
+        - name: term
+          in: query
+          schema:
+            type: string
+        - name: skip
+          in: query
+          schema:
+            type: number
+            default: 0
+        - name: limit
+          in: query
+          schema:
+            maximum: 50
+            type: number
+            default: 10
+        - name: sort
+          in: query
+          schema:
+            type: string
+            default: PUBLISHED_DATE_DESC
+            enum:
+              - VIEWS_COUNT_ASC
+              - VIEWS_COUNT_DESC
+              - CITATION_COUNT_ASC
+              - CITATION_COUNT_DESC
+              - READ_COUNT_ASC
+              - READ_COUNT_DESC
+              - RELEVANT_ASC
+              - RELEVANT_DESC
+              - PUBLISHED_DATE_ASC
+              - PUBLISHED_DATE_DESC
+        - name: author
+          in: query
+          schema:
+            type: string
+        - name: searchDateFrom
+          in: query
+          description: >-
+            Enter date in format of YYYY-MM-DD or in ISO format of
+            YYYY-MM-DDThh:mm:ssZ
+          schema:
+            type: string
+            format: date
+        - name: searchDateTo
+          in: query
+          description: >-
+            Enter date in format of YYYY-MM-DD or in ISO format of
+            YYYY-MM-DDThh:mm:ssZ
+          schema:
+            type: string
+            format: date
+        - name: categoryIds
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              x-constraint:
+                length: 24
+              x-format:
+                hex:
+                  byteAligned: false
+            x-constraint:
+              single: true
+          x-constraint:
+            single: true
+        - name: subjectIds
+          in: query
+          style: form
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+              x-constraint:
+                length: 24
+              x-format:
+                hex:
+                  byteAligned: false
+            x-constraint:
+              single: true
+          x-constraint:
+            single: true
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Model15'
+        '400':
+          description: Bad request
+          content: {}
+        '429':
+          description: >-
+            Too Many Requests, please throttle or talk to us if you think
+            there's a problem
+          content: {}
+  /public-api/v1/licenses:
+    get:
+      summary: Get all licenses with metadata
+      description: >
+        Endpoint to get all available licenses with total number of licenses and
+        license metadata such as name, id, description and url.
+      operationId: getPublicapiV1Licenses
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Model17'
+        '400':
+          description: Bad request
+          content: {}
+        '429':
+          description: >-
+            Too Many Requests, please throttle or talk to us if you think
+            there's a problem
+          content: {}
+  '/public-api/v1/items/{itemId}':
+    get:
+      tags:
+        - public-api/v1/items
+      summary: Get item metadata
+      description: |-
+
+        <div>
+            View the metadata for an item by passing its unique item id.
+            <h3>Example of Query with parameters</h3>
+            <pre><span class="http-get">get</span><code>/public-api/v1/items?itemId=123456</code></pre>
+            <span />
+        </div>
+      operationId: getPublicapiV1ItemsItemid
+      parameters:
+        - name: itemId
+          in: path
+          required: true
+          schema:
+            type: string
+            x-constraint:
+              length: 24
+            x-format:
+              hex:
+                byteAligned: false
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+      responses:
+        '200':
+          description: Success
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/Model22'
+        '400':
+          description: Bad request
+          content: {}
+        '410':
+          description: Item has been withdrawn
+          content: {}
+        '429':
+          description: >-
+            Too Many Requests, please throttle or talk to us if you think
+            there's a problem
+          content: {}
+components:
+  schemas:
+    categoriesSchema:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        name:
+          type: string
+        description:
+          type: string
+        count:
+          type: number
+        parentId:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+    Model1:
+      type: object
+      properties:
+        categoriesSchema:
+          $ref: '#/components/schemas/categoriesSchema'
+    categories:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model1'
+    Result:
+      type: object
+      properties:
+        totalCount:
+          type: number
+        categories:
+          $ref: '#/components/schemas/categories'
+    vor:
+      type: object
+      properties:
+        vorDoi:
+          type: string
+        url:
+          type: string
+    contentType:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        name:
+          type: string
+    Model2:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        name:
+          type: string
+        description:
+          type: string
+    Model3:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model2'
+    smallThumbnail:
+      type: object
+      properties:
+        url:
+          type: string
+    bannerAsset:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        mimeType:
+          type: string
+        fileName:
+          type: string
+        fileSizeBytes:
+          type: number
+        smallThumbnail:
+          $ref: '#/components/schemas/smallThumbnail'
+        mediumThumbnail:
+          $ref: '#/components/schemas/smallThumbnail'
+        largeThumbnail:
+          $ref: '#/components/schemas/smallThumbnail'
+        original:
+          $ref: '#/components/schemas/smallThumbnail'
+    Model4:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        url:
+          type: string
+          x-format:
+            uri: true
+        text:
+          type: string
+        asset:
+          $ref: '#/components/schemas/bannerAsset'
+    sponsors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model4'
+    event:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        eventGroup:
+          $ref: '#/components/schemas/contentType'
+        title:
+          type: string
+        description:
+          type: string
+        location:
+          type: string
+        startDate:
+          type: string
+          x-format:
+            isoDate: true
+        endDate:
+          type: string
+          x-format:
+            isoDate: true
+        createdAt:
+          type: string
+          x-format:
+            isoDate: true
+        updatedAt:
+          type: string
+          x-format:
+            isoDate: true
+        bannerAsset:
+          $ref: '#/components/schemas/bannerAsset'
+        sponsors:
+          $ref: '#/components/schemas/sponsors'
+        url:
+          type: string
+          x-format:
+            uri: true
+        status:
+          type: string
+    Model5:
+      type: object
+      properties:
+        funderId:
+          type: string
+        name:
+          type: string
+        grantNumber:
+          type: string
+        url:
+          type: string
+          x-format:
+            uri: true
+        title:
+          type: string
+    funders:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model5'
+    Model6:
+      type: object
+      properties:
+        name:
+          type: string
+        country:
+          type: string
+        rorId:
+          type: string
+    institutions:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model6'
+    Model7:
+      type: object
+      properties:
+        orcid:
+          type: string
+        title:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        institutions:
+          $ref: '#/components/schemas/institutions'
+    authors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model7'
+    Model8:
+      type: object
+      properties:
+        description:
+          type: string
+        value:
+          type: number
+    metrics:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model8'
+    Model9:
+      type: object
+      properties:
+        version:
+          type: string
+          example: '1'
+        itemId:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        legacyId:
+          type: string
+    versionRefs:
+      minItems: 1
+      type: array
+      items:
+        $ref: '#/components/schemas/Model9'
+    keywords:
+      type: array
+      items:
+        type: string
+    Model10:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        title:
+          type: string
+        description:
+          type: string
+        asset:
+          $ref: '#/components/schemas/bannerAsset'
+    suppItems:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model10'
+    license:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        name:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+          x-format:
+            uri: true
+    Model11:
+      type: object
+      properties:
+        title:
+          type: string
+        description:
+          type: string
+        url:
+          type: string
+          x-format:
+            uri: true
+    webLinks:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model11'
+    author:
+      type: object
+      properties:
+        title:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+    Model12:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        author:
+          $ref: '#/components/schemas/author'
+        createdAt:
+          type: string
+          x-format:
+            isoDate: true
+        number:
+          type: number
+        content:
+          type: string
+        status:
+          type: string
+    replies:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model12'
+    Model13:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        author:
+          $ref: '#/components/schemas/author'
+        createdAt:
+          type: string
+          x-format:
+            isoDate: true
+        number:
+          type: number
+        content:
+          type: string
+        status:
+          type: string
+        replies:
+          $ref: '#/components/schemas/replies'
+    latestComments:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model13'
+    itemDetailsResponseSchema:
+      required:
+        - title
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        doi:
+          type: string
+        vor:
+          $ref: '#/components/schemas/vor'
+        title:
+          type: string
+        abstract:
+          type: string
+        contentType:
+          $ref: '#/components/schemas/contentType'
+        categories:
+          $ref: '#/components/schemas/Model3'
+        subject:
+          $ref: '#/components/schemas/Model2'
+        event:
+          $ref: '#/components/schemas/event'
+        status:
+          type: string
+          enum:
+            - PUBLISHED
+            - RETRACTING
+            - RETRACTED
+        statusDate:
+          type: string
+          x-format:
+            isoDate: true
+        funders:
+          $ref: '#/components/schemas/funders'
+        authors:
+          $ref: '#/components/schemas/authors'
+        metrics:
+          $ref: '#/components/schemas/metrics'
+        version:
+          type: string
+          example: '1'
+        versionRefs:
+          $ref: '#/components/schemas/versionRefs'
+        submittedDate:
+          type: string
+          x-format:
+            isoDate: true
+        publishedDate:
+          type: string
+          x-format:
+            isoDate: true
+        approvedDate:
+          type: string
+          x-format:
+            isoDate: true
+        keywords:
+          $ref: '#/components/schemas/keywords'
+        hasCompetingInterests:
+          type: boolean
+        competingInterestsDeclaration:
+          type: string
+        gainedEthicsApproval:
+          type: string
+          enum:
+            - 'YES'
+            - NOT_RELEVANT
+        suppItems:
+          $ref: '#/components/schemas/suppItems'
+        asset:
+          $ref: '#/components/schemas/bannerAsset'
+        license:
+          $ref: '#/components/schemas/license'
+        webLinks:
+          $ref: '#/components/schemas/webLinks'
+        origin:
+          type: string
+        termsAcceptance:
+          type: boolean
+        versionNote:
+          type: string
+        latestComments:
+          $ref: '#/components/schemas/latestComments'
+        commentsCount:
+          type: number
+        isLatestVersion:
+          type: boolean
+    Model14:
+      type: object
+      properties:
+        itemDetailsResponseSchema:
+          $ref: '#/components/schemas/itemDetailsResponseSchema'
+    itemHits:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model14'
+    Model15:
+      type: object
+      properties:
+        totalCount:
+          type: number
+        itemHits:
+          $ref: '#/components/schemas/itemHits'
+    licenseSchema:
+      required:
+        - name
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        name:
+          type: string
+        description:
+          type: string
+        label:
+          type: string
+        tooltip:
+          type: string
+        url:
+          type: string
+          x-format:
+            uri: true
+    Model16:
+      type: object
+      properties:
+        licenseSchema:
+          $ref: '#/components/schemas/licenseSchema'
+    licenses:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model16'
+    Model17:
+      type: object
+      properties:
+        totalCount:
+          type: number
+        licenses:
+          $ref: '#/components/schemas/licenses'
+    Model19:
+      type: object
+      properties:
+        orcid:
+          type: string
+        title:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        institutions:
+          $ref: '#/components/schemas/institutions'
+        displayOrder:
+          type: number
+    Model20:
+      type: array
+      items:
+        $ref: '#/components/schemas/Model19'
+    Model21:
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        name:
+          type: string
+        label:
+          type: string
+        description:
+          type: string
+        tooltip:
+          type: string
+        url:
+          type: string
+          x-format:
+            uri: true
+    contentWithdrawal:
+      type: object
+      properties:
+        isWithdrawn:
+          type: boolean
+    Model22:
+      required:
+        - title
+      type: object
+      properties:
+        id:
+          type: string
+          x-constraint:
+            length: 24
+          x-format:
+            hex:
+              byteAligned: false
+        doi:
+          type: string
+        vor:
+          $ref: '#/components/schemas/vor'
+        title:
+          type: string
+        abstract:
+          type: string
+        contentType:
+          $ref: '#/components/schemas/contentType'
+        categories:
+          $ref: '#/components/schemas/Model3'
+        subject:
+          $ref: '#/components/schemas/Model2'
+        event:
+          $ref: '#/components/schemas/event'
+        status:
+          type: string
+          enum:
+            - PUBLISHED
+            - RETRACTING
+            - RETRACTED
+        statusDate:
+          type: string
+          x-format:
+            isoDate: true
+        funders:
+          $ref: '#/components/schemas/funders'
+        authors:
+          $ref: '#/components/schemas/Model20'
+        metrics:
+          $ref: '#/components/schemas/metrics'
+        version:
+          type: string
+          example: '1'
+        versionRefs:
+          $ref: '#/components/schemas/versionRefs'
+        submittedDate:
+          type: string
+          x-format:
+            isoDate: true
+        publishedDate:
+          type: string
+          x-format:
+            isoDate: true
+        approvedDate:
+          type: string
+          x-format:
+            isoDate: true
+        keywords:
+          $ref: '#/components/schemas/keywords'
+        hasCompetingInterests:
+          type: boolean
+        competingInterestsDeclaration:
+          type: string
+        gainedEthicsApproval:
+          type: string
+          enum:
+            - 'YES'
+            - NOT_RELEVANT
+        suppItems:
+          $ref: '#/components/schemas/suppItems'
+        asset:
+          $ref: '#/components/schemas/bannerAsset'
+        license:
+          $ref: '#/components/schemas/Model21'
+        webLinks:
+          $ref: '#/components/schemas/webLinks'
+        origin:
+          type: string
+        termsAcceptance:
+          type: boolean
+        versionNote:
+          type: string
+        latestComments:
+          $ref: '#/components/schemas/latestComments'
+        commentsCount:
+          type: number
+        isLatestVersion:
+          type: boolean
+        contentWithdrawal:
+          $ref: '#/components/schemas/contentWithdrawal'
+        legacyId:
+          type: string
