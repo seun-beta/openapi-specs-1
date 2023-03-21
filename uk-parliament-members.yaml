@@ -41,7 +41,7 @@ paths:
           in: query
           description: Members where their most recent house is the house specified
           schema:
-            $ref: '#/components/schemas/House'
+            $ref: "#/components/schemas/House"
         - name: ConstituencyId
           in: query
           description: Members which currently hold the constituency with constituency id
@@ -94,19 +94,19 @@ paths:
             format: int32
             default: 20
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/MemberMembersServiceSearchResult'
+                $ref: "#/components/schemas/MemberMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/MemberMembersServiceSearchResult'
+                $ref: "#/components/schemas/MemberMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/MemberMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/MemberMembersServiceSearchResult"
+        "400":
           description: Bad Request
   /api/Members/SearchHistorical:
     get:
@@ -122,6 +122,7 @@ paths:
         - name: dateToSearchFor
           in: query
           description: Members that were an active member of the Commons or Lords on the date specified
+          required: true
           schema:
             type: string
             format: date-time
@@ -140,19 +141,19 @@ paths:
             format: int32
             default: 20
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/MemberMembersServiceSearchResult'
+                $ref: "#/components/schemas/MemberMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/MemberMembersServiceSearchResult'
+                $ref: "#/components/schemas/MemberMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/MemberMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/MemberMembersServiceSearchResult"
+        "400":
           description: Bad Request
   /api/Members/{id}:
     get:
@@ -174,21 +175,21 @@ paths:
             type: string
             format: date-time
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/MemberItem'
+                $ref: "#/components/schemas/MemberItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/MemberItem'
+                $ref: "#/components/schemas/MemberItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/MemberItem'
-        '400':
+                $ref: "#/components/schemas/MemberItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Biography:
     get:
@@ -204,21 +205,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/MemberBiographyItem'
+                $ref: "#/components/schemas/MemberBiographyItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/MemberBiographyItem'
+                $ref: "#/components/schemas/MemberBiographyItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/MemberBiographyItem'
-        '400':
+                $ref: "#/components/schemas/MemberBiographyItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Contact:
     get:
@@ -234,21 +235,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/ContactInformationListItem'
+                $ref: "#/components/schemas/ContactInformationListItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/ContactInformationListItem'
+                $ref: "#/components/schemas/ContactInformationListItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/ContactInformationListItem'
-        '400':
+                $ref: "#/components/schemas/ContactInformationListItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/ContributionSummary:
     get:
@@ -269,21 +270,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/DebateContributionMembersServiceSearchResult'
+                $ref: "#/components/schemas/DebateContributionMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/DebateContributionMembersServiceSearchResult'
+                $ref: "#/components/schemas/DebateContributionMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/DebateContributionMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/DebateContributionMembersServiceSearchResult"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Edms:
     get:
@@ -304,21 +305,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/EarlyDayMotionMembersServiceSearchResult'
+                $ref: "#/components/schemas/EarlyDayMotionMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/EarlyDayMotionMembersServiceSearchResult'
+                $ref: "#/components/schemas/EarlyDayMotionMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/EarlyDayMotionMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/EarlyDayMotionMembersServiceSearchResult"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Experience:
     get:
@@ -334,21 +335,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/BiographyExperienceListItem'
+                $ref: "#/components/schemas/BiographyExperienceListItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/BiographyExperienceListItem'
+                $ref: "#/components/schemas/BiographyExperienceListItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/BiographyExperienceListItem'
-        '400':
+                $ref: "#/components/schemas/BiographyExperienceListItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Focus:
     get:
@@ -364,21 +365,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/MemberFocusListItem'
+                $ref: "#/components/schemas/MemberFocusListItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/MemberFocusListItem'
+                $ref: "#/components/schemas/MemberFocusListItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/MemberFocusListItem'
-        '400':
+                $ref: "#/components/schemas/MemberFocusListItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/History:
     get:
@@ -389,33 +390,34 @@ paths:
         - name: ids
           in: query
           description: List of MemberIds to find
+          required: true
           schema:
             type: array
             items:
               type: integer
               format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MemberHistoryItem'
+                  $ref: "#/components/schemas/MemberHistoryItem"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MemberHistoryItem'
+                  $ref: "#/components/schemas/MemberHistoryItem"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/MemberHistoryItem'
-        '400':
+                  $ref: "#/components/schemas/MemberHistoryItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/LatestElectionResult:
     get:
@@ -431,21 +433,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/ElectionResultItem'
+                $ref: "#/components/schemas/ElectionResultItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/ElectionResultItem'
+                $ref: "#/components/schemas/ElectionResultItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/ElectionResultItem'
-        '400':
+                $ref: "#/components/schemas/ElectionResultItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/RegisteredInterests:
     get:
@@ -464,23 +466,23 @@ paths:
           in: query
           description: Registered interests of Member by House specified
           schema:
-            $ref: '#/components/schemas/House'
+            $ref: "#/components/schemas/House"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/RegisteredInterestCategoryListItem'
+                $ref: "#/components/schemas/RegisteredInterestCategoryListItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/RegisteredInterestCategoryListItem'
+                $ref: "#/components/schemas/RegisteredInterestCategoryListItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/RegisteredInterestCategoryListItem'
-        '400':
+                $ref: "#/components/schemas/RegisteredInterestCategoryListItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Staff:
     get:
@@ -496,21 +498,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/StaffListItem'
+                $ref: "#/components/schemas/StaffListItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/StaffListItem'
+                $ref: "#/components/schemas/StaffListItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/StaffListItem'
-        '400':
+                $ref: "#/components/schemas/StaffListItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Synopsis:
     get:
@@ -526,21 +528,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/StringItem'
+                $ref: "#/components/schemas/StringItem"
             application/json:
               schema:
-                $ref: '#/components/schemas/StringItem'
+                $ref: "#/components/schemas/StringItem"
             text/json:
               schema:
-                $ref: '#/components/schemas/StringItem'
-        '400':
+                $ref: "#/components/schemas/StringItem"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/Voting:
     get:
@@ -559,28 +561,28 @@ paths:
           in: query
           required: true
           schema:
-            $ref: '#/components/schemas/House'
+            $ref: "#/components/schemas/House"
         - name: page
           in: query
           schema:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/VoteMembersServiceSearchResult'
+                $ref: "#/components/schemas/VoteMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/VoteMembersServiceSearchResult'
+                $ref: "#/components/schemas/VoteMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/VoteMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/VoteMembersServiceSearchResult"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Members/{id}/WrittenQuestions:
     get:
@@ -601,21 +603,21 @@ paths:
             type: integer
             format: int32
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/WrittenQuestionMembersServiceSearchResult'
+                $ref: "#/components/schemas/WrittenQuestionMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/WrittenQuestionMembersServiceSearchResult'
+                $ref: "#/components/schemas/WrittenQuestionMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/WrittenQuestionMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/WrittenQuestionMembersServiceSearchResult"
+        "400":
           description: Bad Request
-        '404':
+        "404":
           description: Not Found
   /api/Parties/StateOfTheParties/{house}/{forDate}:
     get:
@@ -628,7 +630,7 @@ paths:
           description: State of parties in Commons or Lords.
           required: true
           schema:
-            $ref: '#/components/schemas/House'
+            $ref: "#/components/schemas/House"
         - name: forDate
           in: path
           description: State of parties for the date specified
@@ -637,19 +639,19 @@ paths:
             type: string
             format: date-time
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/PartySeatCountMembersServiceSearchResult'
+                $ref: "#/components/schemas/PartySeatCountMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/PartySeatCountMembersServiceSearchResult'
+                $ref: "#/components/schemas/PartySeatCountMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/PartySeatCountMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/PartySeatCountMembersServiceSearchResult"
+        "400":
           description: Bad Request
   /api/Parties/LordsByType/{forDate}:
     get:
@@ -665,19 +667,19 @@ paths:
             type: string
             format: date-time
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/LordsByTypeMembersServiceSearchResult'
+                $ref: "#/components/schemas/LordsByTypeMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/LordsByTypeMembersServiceSearchResult'
+                $ref: "#/components/schemas/LordsByTypeMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/LordsByTypeMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/LordsByTypeMembersServiceSearchResult"
+        "400":
           description: Bad Request
   /api/Parties/GetActive/{house}:
     get:
@@ -690,21 +692,21 @@ paths:
           description: Current parties by house
           required: true
           schema:
-            $ref: '#/components/schemas/House'
+            $ref: "#/components/schemas/House"
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/PartyMembersServiceSearchResult'
+                $ref: "#/components/schemas/PartyMembersServiceSearchResult"
             application/json:
               schema:
-                $ref: '#/components/schemas/PartyMembersServiceSearchResult'
+                $ref: "#/components/schemas/PartyMembersServiceSearchResult"
             text/json:
               schema:
-                $ref: '#/components/schemas/PartyMembersServiceSearchResult'
-        '400':
+                $ref: "#/components/schemas/PartyMembersServiceSearchResult"
+        "400":
           description: Bad Request
 components:
   schemas:
@@ -724,7 +726,7 @@ components:
           type: string
           nullable: true
         department:
-          $ref: '#/components/schemas/GovernmentDepartment'
+          $ref: "#/components/schemas/GovernmentDepartment"
       additionalProperties: false
     BiographyExperience:
       type: object
@@ -767,19 +769,19 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyExperience'
+            $ref: "#/components/schemas/BiographyExperience"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     BiographyItem:
       type: object
       properties:
         house:
-          $ref: '#/components/schemas/House'
+          $ref: "#/components/schemas/House"
         name:
           type: string
           nullable: true
@@ -817,17 +819,17 @@ components:
           format: date-time
           nullable: true
         currentRepresentation:
-          $ref: '#/components/schemas/ConstituencyRepresentation'
+          $ref: "#/components/schemas/ConstituencyRepresentation"
       additionalProperties: false
     ConstituencyItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/Constituency'
+          $ref: "#/components/schemas/Constituency"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     ConstituencyMembersServiceSearchResult:
@@ -836,7 +838,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/ConstituencyItem'
+            $ref: "#/components/schemas/ConstituencyItem"
           nullable: true
         totalResults:
           type: integer
@@ -853,16 +855,16 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     ConstituencyRepresentation:
       type: object
       properties:
         member:
-          $ref: '#/components/schemas/MemberItem'
+          $ref: "#/components/schemas/MemberItem"
         representation:
-          $ref: '#/components/schemas/HouseMembership'
+          $ref: "#/components/schemas/HouseMembership"
       additionalProperties: false
     ConstituencyRepresentationListItem:
       type: object
@@ -870,12 +872,12 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/ConstituencyRepresentation'
+            $ref: "#/components/schemas/ConstituencyRepresentation"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     ContactInformation:
@@ -931,12 +933,12 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/ContactInformation'
+            $ref: "#/components/schemas/ContactInformation"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     DebateContribution:
@@ -993,11 +995,11 @@ components:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/DebateContribution'
+          $ref: "#/components/schemas/DebateContribution"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     DebateContributionMembersServiceSearchResult:
@@ -1006,7 +1008,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/DebateContributionItem'
+            $ref: "#/components/schemas/DebateContributionItem"
           nullable: true
         totalResults:
           type: integer
@@ -1023,7 +1025,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     EarlyDayMotion:
@@ -1053,11 +1055,11 @@ components:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/EarlyDayMotion'
+          $ref: "#/components/schemas/EarlyDayMotion"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     EarlyDayMotionMembersServiceSearchResult:
@@ -1066,7 +1068,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/EarlyDayMotionItem'
+            $ref: "#/components/schemas/EarlyDayMotionItem"
           nullable: true
         totalResults:
           type: integer
@@ -1083,7 +1085,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     ElectionCandidate:
@@ -1097,7 +1099,7 @@ components:
           type: string
           nullable: true
         party:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
         resultChange:
           type: string
           nullable: true
@@ -1131,7 +1133,7 @@ components:
           type: integer
           format: int32
         winningParty:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
         electionTitle:
           type: string
           nullable: true
@@ -1149,18 +1151,18 @@ components:
         candidates:
           type: array
           items:
-            $ref: '#/components/schemas/ElectionCandidate'
+            $ref: "#/components/schemas/ElectionCandidate"
           nullable: true
       additionalProperties: false
     ElectionResultItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/ElectionResult'
+          $ref: "#/components/schemas/ElectionResult"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     GenericReferenceData:
@@ -1193,7 +1195,7 @@ components:
       type: object
       properties:
         type:
-          $ref: '#/components/schemas/PostType'
+          $ref: "#/components/schemas/PostType"
         name:
           type: string
           nullable: true
@@ -1206,12 +1208,12 @@ components:
         postHolders:
           type: array
           items:
-            $ref: '#/components/schemas/GovernmentOppositionPostHolder'
+            $ref: "#/components/schemas/GovernmentOppositionPostHolder"
           nullable: true
         governmentDepartments:
           type: array
           items:
-            $ref: '#/components/schemas/GovernmentDepartment'
+            $ref: "#/components/schemas/GovernmentDepartment"
           nullable: true
         createdWhen:
           type: string
@@ -1224,7 +1226,7 @@ components:
       type: object
       properties:
         member:
-          $ref: '#/components/schemas/MemberItem'
+          $ref: "#/components/schemas/MemberItem"
         startDate:
           type: string
           format: date-time
@@ -1242,11 +1244,11 @@ components:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/GovernmentOppositionPost'
+          $ref: "#/components/schemas/GovernmentOppositionPost"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     GovernmentType:
@@ -1284,7 +1286,7 @@ components:
           format: int32
           nullable: true
         house:
-          $ref: '#/components/schemas/House'
+          $ref: "#/components/schemas/House"
         membershipStartDate:
           type: string
           format: date-time
@@ -1304,7 +1306,7 @@ components:
           format: int32
           nullable: true
         membershipStatus:
-          $ref: '#/components/schemas/HouseMembershipStatus'
+          $ref: "#/components/schemas/HouseMembershipStatus"
       additionalProperties: false
     HouseMembershipStatus:
       type: object
@@ -1322,7 +1324,7 @@ components:
           format: int32
           nullable: true
         status:
-          $ref: '#/components/schemas/MemberStatus'
+          $ref: "#/components/schemas/MemberStatus"
         statusStartDate:
           type: string
           format: date-time
@@ -1357,17 +1359,17 @@ components:
           type: integer
           format: int32
         party:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
       additionalProperties: false
     LordsByTypeItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/LordsByType'
+          $ref: "#/components/schemas/LordsByType"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     LordsByTypeMembersServiceSearchResult:
@@ -1376,7 +1378,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/LordsByTypeItem'
+            $ref: "#/components/schemas/LordsByTypeItem"
           nullable: true
         totalResults:
           type: integer
@@ -1393,7 +1395,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     Member:
@@ -1415,12 +1417,12 @@ components:
           type: string
           nullable: true
         latestParty:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
         gender:
           type: string
           nullable: true
         latestHouseMembership:
-          $ref: '#/components/schemas/HouseMembership'
+          $ref: "#/components/schemas/HouseMembership"
         thumbnailUrl:
           type: string
           nullable: true
@@ -1431,53 +1433,53 @@ components:
         representations:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         electionsContested:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         houseMemberships:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         governmentPosts:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         oppositionPosts:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         otherPosts:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         partyAffiliations:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
         committeeMemberships:
           type: array
           items:
-            $ref: '#/components/schemas/BiographyItem'
+            $ref: "#/components/schemas/BiographyItem"
           nullable: true
       additionalProperties: false
     MemberBiographyItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/MemberBiography'
+          $ref: "#/components/schemas/MemberBiography"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     MemberFocus:
@@ -1498,12 +1500,12 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/MemberFocus'
+            $ref: "#/components/schemas/MemberFocus"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     MemberHistory:
@@ -1518,39 +1520,39 @@ components:
         partyHistory:
           type: array
           items:
-            $ref: '#/components/schemas/MemberParty'
+            $ref: "#/components/schemas/MemberParty"
           nullable: true
         houseMembershipHistory:
           type: array
           items:
-            $ref: '#/components/schemas/HouseMembership'
+            $ref: "#/components/schemas/HouseMembership"
           nullable: true
         nameHistory:
           type: array
           items:
-            $ref: '#/components/schemas/MemberName'
+            $ref: "#/components/schemas/MemberName"
           nullable: true
       additionalProperties: false
     MemberHistoryItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/MemberHistory'
+          $ref: "#/components/schemas/MemberHistory"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     MemberItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/Member'
+          $ref: "#/components/schemas/Member"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     MemberMembersServiceSearchResult:
@@ -1559,7 +1561,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/MemberItem'
+            $ref: "#/components/schemas/MemberItem"
           nullable: true
         totalResults:
           type: integer
@@ -1576,7 +1578,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     MemberName:
@@ -1613,7 +1615,7 @@ components:
           format: date-time
           nullable: true
         party:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
       additionalProperties: false
     MemberStatus:
       enum:
@@ -1623,7 +1625,7 @@ components:
         - 3
       type: integer
       format: int32
-    
+
     Party:
       type: object
       properties:
@@ -1647,7 +1649,7 @@ components:
         isLordsSpiritualParty:
           type: boolean
         governmentType:
-          $ref: '#/components/schemas/GovernmentType'
+          $ref: "#/components/schemas/GovernmentType"
         isIndependentParty:
           type: boolean
           readOnly: true
@@ -1656,11 +1658,11 @@ components:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     PartyMembersServiceSearchResult:
@@ -1669,7 +1671,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/PartyItem'
+            $ref: "#/components/schemas/PartyItem"
           nullable: true
         totalResults:
           type: integer
@@ -1686,7 +1688,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     PartySeatCount:
@@ -1708,17 +1710,17 @@ components:
           type: integer
           format: int32
         party:
-          $ref: '#/components/schemas/Party'
+          $ref: "#/components/schemas/Party"
       additionalProperties: false
     PartySeatCountItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/PartySeatCount'
+          $ref: "#/components/schemas/PartySeatCount"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     PartySeatCountMembersServiceSearchResult:
@@ -1727,7 +1729,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/PartySeatCountItem'
+            $ref: "#/components/schemas/PartySeatCountItem"
           nullable: true
         totalResults:
           type: integer
@@ -1744,7 +1746,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     PortraitCropEnum:
@@ -1788,7 +1790,7 @@ components:
         childInterests:
           type: array
           items:
-            $ref: '#/components/schemas/RegisteredInterest'
+            $ref: "#/components/schemas/RegisteredInterest"
           nullable: true
       additionalProperties: false
     RegisteredInterestCategory:
@@ -1806,7 +1808,7 @@ components:
         interests:
           type: array
           items:
-            $ref: '#/components/schemas/RegisteredInterest'
+            $ref: "#/components/schemas/RegisteredInterest"
           nullable: true
       additionalProperties: false
     RegisteredInterestCategoryListItem:
@@ -1815,12 +1817,12 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/RegisteredInterestCategory'
+            $ref: "#/components/schemas/RegisteredInterestCategory"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     Staff:
@@ -1845,12 +1847,12 @@ components:
         value:
           type: array
           items:
-            $ref: '#/components/schemas/Staff'
+            $ref: "#/components/schemas/Staff"
           nullable: true
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     StringItem:
@@ -1862,14 +1864,14 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     Vote:
       type: object
       properties:
         house:
-          $ref: '#/components/schemas/House'
+          $ref: "#/components/schemas/House"
         id:
           type: integer
           format: int32
@@ -1897,11 +1899,11 @@ components:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/Vote'
+          $ref: "#/components/schemas/Vote"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     VoteMembersServiceSearchResult:
@@ -1910,7 +1912,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/VoteItem'
+            $ref: "#/components/schemas/VoteItem"
           nullable: true
         totalResults:
           type: integer
@@ -1927,7 +1929,7 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     WrittenQuestion:
@@ -1940,7 +1942,7 @@ components:
           type: integer
           format: int32
         house:
-          $ref: '#/components/schemas/House'
+          $ref: "#/components/schemas/House"
         memberHasInterest:
           type: boolean
         dateTabled:
@@ -1970,7 +1972,7 @@ components:
         groupedQuestionsDates:
           type: array
           items:
-            $ref: '#/components/schemas/GroupedQuestion'
+            $ref: "#/components/schemas/GroupedQuestion"
           nullable: true
         answerIsHolding:
           type: boolean
@@ -2000,21 +2002,21 @@ components:
           type: string
           nullable: true
         answeringMember:
-          $ref: '#/components/schemas/Member'
+          $ref: "#/components/schemas/Member"
         correctingMember:
-          $ref: '#/components/schemas/Member'
+          $ref: "#/components/schemas/Member"
         answeringBody:
-          $ref: '#/components/schemas/AnsweringBody'
+          $ref: "#/components/schemas/AnsweringBody"
       additionalProperties: false
     WrittenQuestionItem:
       type: object
       properties:
         value:
-          $ref: '#/components/schemas/WrittenQuestion'
+          $ref: "#/components/schemas/WrittenQuestion"
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
     WrittenQuestionMembersServiceSearchResult:
@@ -2023,7 +2025,7 @@ components:
         items:
           type: array
           items:
-            $ref: '#/components/schemas/WrittenQuestionItem'
+            $ref: "#/components/schemas/WrittenQuestionItem"
           nullable: true
         totalResults:
           type: integer
@@ -2040,6 +2042,6 @@ components:
         links:
           type: array
           items:
-            $ref: '#/components/schemas/Link'
+            $ref: "#/components/schemas/Link"
           nullable: true
       additionalProperties: false
