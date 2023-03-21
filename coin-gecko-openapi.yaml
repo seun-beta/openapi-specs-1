@@ -8,7 +8,7 @@ servers:
 paths:
   /simple/price:
     get:
-      operationId: simple_price
+      operationId: simplePrice
       tags:
         - simple
       summary:
@@ -34,7 +34,7 @@ paths:
           schema:
             type: string
             default: "false"
-            enum: 
+            enum:
               - "true"
               - "false"
         - name: include_24hr_vol
@@ -42,7 +42,7 @@ paths:
           schema:
             type: string
             default: "false"
-            enum: 
+            enum:
               - "true"
               - "false"
         - name: include_24hr_change
@@ -50,7 +50,7 @@ paths:
           schema:
             type: string
             default: "false"
-            enum: 
+            enum:
               - "true"
               - "false"
       responses:
@@ -59,7 +59,7 @@ paths:
           content: {}
   /simple/supported_vs_currencies:
     get:
-      operationId: simple_supported_vs_currencies
+      operationId: simpleSupportedVsCurrencies
       tags:
         - simple
       summary: Get list of supported_vs_currencies.
@@ -69,13 +69,13 @@ paths:
           content: {}
   /coins/markets:
     get:
+      operationId: coinsMarkets
       tags:
         - coins
       summary:
         List all supported coins price, market cap, volume, and market related
         data
-      description:
-        Use this to obtain all the coins market data.
+      description: Use this to obtain all the coins market data.
       parameters:
         - name: vs_currency
           in: query
@@ -85,8 +85,7 @@ paths:
             type: string
         - name: ids
           in: query
-          description:
-            The ids of the coin, comma separated crytocurrency symbols (base).
+          description: The ids of the coin, comma separated crytocurrency symbols (base).
           schema:
             type: string
         - name: order
@@ -122,7 +121,7 @@ paths:
           description: Include sparkline 7 days data (eg. true, false)
           schema:
             type: boolean
-            enum: 
+            enum:
               - true
               - false
             default: false
@@ -139,6 +138,7 @@ paths:
           content: {}
   /coins/{id}:
     get:
+      operationId: coinsId
       tags:
         - coins
       summary:
@@ -158,14 +158,14 @@ paths:
           schema:
             type: string
             default: "true"
-            enum: 
+            enum:
               - "true"
               - "false"
         - name: tickers
           in: query
           description: "Include tickers data"
           schema:
-            enum :
+            enum:
               - true
               - false
             default: false
@@ -174,7 +174,7 @@ paths:
           in: query
           description: "Include market_data (true/false) [default: true]"
           schema:
-            enum :
+            enum:
               - true
               - false
             default: true
@@ -183,17 +183,16 @@ paths:
           in: query
           description: "Include community_data "
           schema:
-            enum :
+            enum:
               - true
               - false
             default: true
             type: boolean
         - name: sparkline
           in: query
-          description:
-            "Include sparkline 7 days data"
+          description: "Include sparkline 7 days data"
           schema:
-            enum :
+            enum:
               - true
               - false
             default: false
@@ -204,6 +203,7 @@ paths:
           content: {}
   /coins/{id}/history:
     get:
+      operationId: coinsIdHistory
       tags:
         - coins
       summary:
@@ -230,9 +230,9 @@ paths:
           description: Set to false to exclude localized languages in response
           schema:
             default: "true"
-            enum : 
-            - "true"
-            - "false"
+            enum:
+              - "true"
+              - "false"
             type: string
       responses:
         200:
@@ -240,6 +240,7 @@ paths:
           content: {}
   /coins/{id}/market_chart:
     get:
+      operationId: coinsIdMarketChart
       tags:
         - coins
       summary:
@@ -274,7 +275,7 @@ paths:
           in: query
           description: "Data interval."
           schema:
-            enum: 
+            enum:
               - daily
             type: string
       responses:
@@ -285,6 +286,7 @@ paths:
           content: {}
   /coins/{id}/ohlc:
     get:
+      operationId: coinsIdOHLC
       tags:
         - coins
       summary: Get coin's OHLC
@@ -333,6 +335,7 @@ paths:
                   type: number
   /nfts/list:
     get:
+      operationId: nftsList
       tags:
         - nfts (beta)
       summary:
@@ -371,11 +374,11 @@ paths:
           content: {}
   /nfts/{id}:
     get:
+      operationId: nftsId
       tags:
         - nfts (beta)
       summary: Get current data (name, price_floor, volume_24h ...) for an NFT collection
-      description:
-        Get current data for an NFT collection.
+      description: Get current data for an NFT collection.
       parameters:
         - name: id
           in: path
@@ -391,6 +394,7 @@ paths:
           content: {}
   /search:
     get:
+      operationId: search
       tags:
         - search
       summary: Search for coins, categories and markets on CoinGecko
@@ -412,6 +416,7 @@ paths:
           content: {}
   /global:
     get:
+      operationId: global
       tags:
         - global
       summary: Get cryptocurrency global data
