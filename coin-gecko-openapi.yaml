@@ -1,0 +1,426 @@
+openapi: 3.0.1
+info:
+  title: CoinGecko API V3
+  description: ""
+  version: 3.0.0
+servers:
+  - url: https://api.coingecko.com/api/v3
+paths:
+  /simple/price:
+    get:
+      operationId: simple_price
+      tags:
+        - simple
+      summary:
+        Get the current price of any cryptocurrencies in any other supported
+        currencies that you need.
+      parameters:
+        - name: ids
+          in: query
+          description: |-
+            id of coins, comma-separated if querying more than 1 coin
+          required: true
+          schema:
+            type: string
+        - name: vs_currencies
+          in: query
+          description: |-
+            vs_currency of coins, comma-separated if querying more than 1 vs_currency
+          required: true
+          schema:
+            type: string
+        - name: include_market_cap
+          in: query
+          schema:
+            type: string
+            default: "false"
+            enum: 
+              - "true"
+              - "false"
+        - name: include_24hr_vol
+          in: query
+          schema:
+            type: string
+            default: "false"
+            enum: 
+              - "true"
+              - "false"
+        - name: include_24hr_change
+          in: query
+          schema:
+            type: string
+            default: "false"
+            enum: 
+              - "true"
+              - "false"
+      responses:
+        200:
+          description: price(s) of cryptocurrency
+          content: {}
+  /simple/supported_vs_currencies:
+    get:
+      operationId: simple_supported_vs_currencies
+      tags:
+        - simple
+      summary: Get list of supported_vs_currencies.
+      responses:
+        200:
+          description: list of supported_vs_currencies
+          content: {}
+  /coins/markets:
+    get:
+      tags:
+        - coins
+      summary:
+        List all supported coins price, market cap, volume, and market related
+        data
+      description:
+        Use this to obtain all the coins market data.
+      parameters:
+        - name: vs_currency
+          in: query
+          description: The target currency of market data (usd, eur, jpy, etc.)
+          required: true
+          schema:
+            type: string
+        - name: ids
+          in: query
+          description:
+            The ids of the coin, comma separated crytocurrency symbols (base).
+          schema:
+            type: string
+        - name: order
+          in: query
+          description: |-
+            sort results by field.
+          schema:
+            enum:
+              - market_cap_asc
+              - market_cap_desc
+              - volume_asc
+              - volume_desc
+              - id_desc
+              - id_asc
+            type: string
+            default: market_cap_desc
+        - name: per_page
+          in: query
+          description: |-
+            valid values: 1..250
+             Total results per page
+          schema:
+            type: integer
+            default: 100
+        - name: page
+          in: query
+          description: Page through results
+          schema:
+            type: integer
+            default: 1
+        - name: sparkline
+          in: query
+          description: Include sparkline 7 days data (eg. true, false)
+          schema:
+            type: boolean
+            enum: 
+              - true
+              - false
+            default: false
+        - name: price_change_percentage
+          in: query
+          description: Include price change percentage in 1h, 24h, 7d, 14d, 30d,
+            200d, 1y (eg. '`1h,24h,7d`' comma-separated, invalid values will be
+            discarded)
+          schema:
+            type: string
+      responses:
+        200:
+          description: List all coins with market data
+          content: {}
+  /coins/{id}:
+    get:
+      tags:
+        - coins
+      summary:
+        Get current data (name, price, market, ... including exchange tickers)
+        for a coin
+      description: |
+        Get current data for a coin.
+      parameters:
+        - name: id
+          in: path
+          description: pass the coin id eg. bitcoin
+          required: true
+          schema:
+            type: string
+        - name: localization
+          in: query
+          schema:
+            type: string
+            default: "true"
+            enum: 
+              - "true"
+              - "false"
+        - name: tickers
+          in: query
+          description: "Include tickers data"
+          schema:
+            enum :
+              - true
+              - false
+            default: false
+            type: boolean
+        - name: market_data
+          in: query
+          description: "Include market_data (true/false) [default: true]"
+          schema:
+            enum :
+              - true
+              - false
+            default: true
+            type: boolean
+        - name: community_data
+          in: query
+          description: "Include community_data "
+          schema:
+            enum :
+              - true
+              - false
+            default: true
+            type: boolean
+        - name: sparkline
+          in: query
+          description:
+            "Include sparkline 7 days data"
+          schema:
+            enum :
+              - true
+              - false
+            default: false
+            type: boolean
+      responses:
+        200:
+          description: Get current data for a coin
+          content: {}
+  /coins/{id}/history:
+    get:
+      tags:
+        - coins
+      summary:
+        Get historical data (price, market cap, 24hr volume, ..) at a given
+        date for a coin.
+      description: |
+        Get historical data (price, market cap, 24hr volume, ..) at a given date for a coin.
+        The data returned is at 00:00:00 UTC.
+      parameters:
+        - name: id
+          in: path
+          description: coin_id
+          required: true
+          schema:
+            type: string
+        - name: date
+          in: query
+          description: The date of data snapshot in dd-mm-yyyy eg. 30-12-2022
+          required: true
+          schema:
+            type: string
+        - name: localization
+          in: query
+          description: Set to false to exclude localized languages in response
+          schema:
+            default: "true"
+            enum : 
+            - "true"
+            - "false"
+            type: string
+      responses:
+        200:
+          description: Get historical data at a given date for a coin
+          content: {}
+  /coins/{id}/market_chart:
+    get:
+      tags:
+        - coins
+      summary:
+        Get historical market data include price, market cap, and 24h volume
+        (granularity auto)
+      description: |-
+        Get historical market data. 
+         Data granularity is automatic (cannot be adjusted)
+         1 day from current time = 5 minute interval data
+         1 - 90 days from current time = hourly dataabove 
+         90 days from current time = daily data (00:00 UTC)
+      parameters:
+        - name: id
+          in: path
+          description: coin_id
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: The target currency of market data (usd, eur, jpy, etc.)
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: Data up to number of days ago (eg. 1,14,30,max)
+          required: true
+          schema:
+            type: string
+        - name: interval
+          in: query
+          description: "Data interval."
+          schema:
+            enum: 
+              - daily
+            type: string
+      responses:
+        200:
+          description:
+            Get historical market data include price, market cap, and 24h
+            volume
+          content: {}
+  /coins/{id}/ohlc:
+    get:
+      tags:
+        - coins
+      summary: Get coin's OHLC
+      description: |-
+        Candle's body:
+
+        1 - 2 days: 30 minutes
+        3 - 30 days: 4 hours
+        31 days and beyond: 4 days
+      parameters:
+        - name: id
+          in: path
+          description: pass the coin id (can be obtained from /coins/list) eg. bitcoin
+          required: true
+          schema:
+            type: string
+        - name: vs_currency
+          in: query
+          description: The target currency of market data (usd, eur, jpy, etc.)
+          required: true
+          schema:
+            type: string
+        - name: days
+          in: query
+          description: " Data up to number of days ago (1/7/14/30/90/180/365/max)"
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: |-
+            successful operation
+
+            [
+            1594382400000 (time),
+            1.1 (open),
+             2.2 (high),
+             3.3 (low),
+             4.4 (close)
+            ]
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: number
+  /nfts/list:
+    get:
+      tags:
+        - nfts (beta)
+      summary:
+        List all supported NFT ids, paginated by 100 items per page, paginated
+        to 100 items
+      description:
+        Use this to obtain all the NFT ids in order to make API calls,
+        paginated to 100 items
+      parameters:
+        - name: order
+          in: query
+          schema:
+            enum:
+              - h24_volume_native_asc
+              - h24_volume_native_desc
+              - floor_price_native_asc
+              - floor_price_native_desc
+              - market_cap_native_asc
+              - market_cap_native_desc
+              - market_cap_usd_asc
+              - market_cap_usd_desc
+            type: string
+        - name: per_page
+          in: query
+          description: Total results per page
+          schema:
+            type: integer
+        - name: page
+          in: query
+          description: Page through results
+          schema:
+            type: integer
+      responses:
+        200:
+          description: List all nfts with id, contract_address, name ...
+          content: {}
+  /nfts/{id}:
+    get:
+      tags:
+        - nfts (beta)
+      summary: Get current data (name, price_floor, volume_24h ...) for an NFT collection
+      description:
+        Get current data for an NFT collection.
+      parameters:
+        - name: id
+          in: path
+          description: id of nft collection (can be obtained from /nfts/list)
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description:
+            display an NFT collection with name, price_floor, volume_24h
+            ...
+          content: {}
+  /search:
+    get:
+      tags:
+        - search
+      summary: Search for coins, categories and markets on CoinGecko
+      description:
+        Search for coins, categories and markets listed on CoinGecko ordered
+        by largest Market Cap first
+      parameters:
+        - name: query
+          in: query
+          description: Search string
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description:
+            List of coins, categories and markets matching search term
+            ordered by market cap
+          content: {}
+  /global:
+    get:
+      tags:
+        - global
+      summary: Get cryptocurrency global data
+      description: |
+        Get cryptocurrency global data
+      responses:
+        200:
+          description:
+            Get global data - total_volume, total_market_cap, ongoing icos
+            etc
+          content: {}
+components: {}
