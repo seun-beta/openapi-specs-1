@@ -1,0 +1,259 @@
+openapi: 3.0.0
+info:
+  termsOfService: https://theysaidso.com/terms#api
+  description: They Said So Quotes API offers a complete feature rich REST API access to its quotes platform.
+  title: They Said So Quotes API
+  version: "3.1"
+  contact:
+    name: They Said So
+    url: https://theysaidso.com/api/quote
+servers:
+  - url: https://quotes.rest
+tags:
+  - name: Quote of the day
+    description: Access quote of the day service. Use this to get the quote of the day in various categories. This is a free API that is available to public. You must credit They Said So if you are using the free version. 
+    externalDocs:
+      description: Find out more
+      url: https://theysaidso.com/api/quote#qod
+paths:
+  /qod:
+    get:
+      security:
+        - X-TheySaidSo-Api-Secret: []    
+      tags:
+        - Quote of the day
+      description: |
+        Gets `Quote of the Day`. Optional `category` param determines the category of returned quote of the day
+      parameters:
+        - description: QOD Category
+          in: query
+          name: category
+          required: false
+          schema:
+            type: string
+            format: string
+        - description: Language of the QOD. The language must be supported in our QOD system.
+          in: query
+          name: language
+          required: false
+          schema:
+            type: string
+            format: string
+            default: "en"
+      responses:
+        "200":
+          description: 200  response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/QuoteResponse"
+              examples:
+                response:
+                  value: >-
+                    {
+                        "success": {
+                            "total": 1
+                        },
+                        "contents": {
+                            "quotes": [
+                                {
+                                    "quote": "Do not worry if you have built your castles in the air. They are where they should be. Now put the foundations under them.",
+                                    "length": "122",
+                                    "author": "Henry David Thoreau",
+                                    "tags": [
+                                        "dreams",
+                                        "inspire",
+                                        "worry"
+                                    ],
+                                    "category": "inspire",
+                                    "date": "2016-11-21",
+                                    "title": "Inspiring Quote of the day",
+                                    "background": "https://theysaidso.com/img/bgs/man_on_the_mountain.jpg",
+                                    "id": "mYpH8syTM8rf8KFORoAJmQeF"
+                                }
+                            ]
+                        }
+                    }
+            application/xml:
+              examples:
+                response:
+                  value: >-
+                    <?xml version="1.0"?>
+                    <response>
+                      <success>
+                        <total>1</total>
+                      </success>
+                      <contents>
+                        <quotes>
+                          <quote>Sometimes you climb out of bed in the morning and you think, I'm not going to make it, but you laugh inside &#x2014; remembering all the times you've felt that way.</quote>
+                          <length>164</length>
+                          <author>Charles Bukowski</author>
+                          <tags>depression</tags>
+                          <tags>inspire</tags>
+                          <tags>tso-life</tags>
+                          <category>inspire</category>
+                          <date>2016-11-23</date>
+                          <title>Inspiring Quote of the day</title>
+                          <background>https://theysaidso.com/img/bgs/man_on_the_mountain.jpg</background>
+                          <id>k7rTMtmveYHUN2ImwxNhhAeF</id>
+                        </quotes>
+                      </contents>
+                    </response>
+        "400":
+          description: 400  response
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "error": {
+                        "code": 400,
+                        "message": "Bad Request: QOD category not supported for this category and language combination"
+                      }
+                    }               
+  /qod/categories:
+    get:
+      tags:
+        - Quote of the day
+      security:
+        - X-TheySaidSo-Api-Secret: []           
+      description: |
+        Gets a list of `Quote of the Day` Categories.
+      parameters:
+        - description: Language of the QOD category. The language must be supported in our QOD system.
+          in: query
+          name: language
+          required: false
+          schema:
+            type: string
+            format: string
+            default: "en"      
+        - description: Return detailed information of the categories. Note the data format changes between the two values of this switch.
+          in: query
+          name: detailed
+          required: false
+          schema:
+            type: boolean
+            format: boolean
+            default: false                
+      responses:
+        "200":
+          description: 200  response
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                        "success": {
+                            "total": 8
+                        },
+                        "contents": {
+                            "categories": {
+                                "inspire": "Inspiring Quote of the day",
+                                "management": "Management Quote of the day",
+                                "sports": "Sports Quote of the day",
+                                "life": "Quote of the day about life",
+                                "funny": "Funny Quote of the day",
+                                "love": "Quote of the day about Love",
+                                "art": "Art quote of the day ",
+                                "students": "Quote of the day for students"
+                            },
+                            "copyright": "2013-15 http://theysaidso.com"
+                        }
+                    }   
+        "400":
+          description: 400  response
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "error": {
+                        "code": 400,
+                        "message": "No QOD categories defined for this language."
+                      }
+                    }                            
+  /qod/languages:
+    get:
+      tags:
+        - Quote of the day
+      security:
+        - X-TheySaidSo-Api-Secret: []           
+      description: |
+        Gets a list of supported languages for `Quote of the Day`. 
+      responses:
+        "200":
+          description: 200  response
+          content:
+            application/json:
+              examples:
+                response:
+                  value: |-
+                    {
+                      "success": {
+                        "total": 2
+                      },
+                      "contents": {
+                        "languages": [
+                          "en",
+                          "fr",
+                          "ta"
+                        ]
+                      },
+                      "baseurl": "https://theysaidso.com",
+                      "copyright": "2019-22 https://theysaidso.com"
+                    }
+components:
+  securitySchemes:
+    X-TheySaidSo-Api-Secret:
+      type: apiKey
+      name: X-TheySaidSo-Api-Secret
+      in: header   
+  schemas:
+    QuoteResponse:
+      properties:
+        success:
+          description: Metadata about this successful call
+          type: string
+        contents:
+          properties:
+            quotes:
+              description: List of quotes
+              items:
+                $ref: "#/components/schemas/Quote"
+              type: array
+    Quote:
+      allOf:
+        - $ref: "#/components/schemas/NewQuote"
+        - required:
+            - id
+          properties:
+            id:
+              description: Unique identifier representing a specific quote in
+                theysaidso.com.
+              type: string
+            image:
+              description: Image URL that can be used for background to display this quote.
+              type: string
+            length:
+              description: Length of the quote string.
+              format: int32
+              type: integer
+    NewQuote:
+      properties:
+        author:
+          description: Author name of quote.
+          type: string
+        quote:
+          description: The Quote.
+          type: string
+        tags:
+          description: Array of tags/categories.
+          items:
+            type: string
+          type: array
+      required:
+        - quote
