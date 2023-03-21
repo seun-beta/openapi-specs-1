@@ -9,8 +9,8 @@ info:
     name: MIT License
     url: https://github.com/nager/Nager.Date/blob/master/LICENSE.md
   version: v3
-servers: 
-    - url: "https://date.nager.at"
+servers:
+  - url: https://date.nager.at
 paths:
   /api/v3/CountryInfo/{countryCode}:
     get:
@@ -21,23 +21,23 @@ paths:
       parameters:
         - name: countryCode
           in: path
-          description: ''
+          description: ""
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/CountryInfoDto'
+                $ref: "#/components/schemas/CountryInfoDto"
             application/json:
               schema:
-                $ref: '#/components/schemas/CountryInfoDto'
+                $ref: "#/components/schemas/CountryInfoDto"
             text/json:
               schema:
-                $ref: '#/components/schemas/CountryInfoDto'
+                $ref: "#/components/schemas/CountryInfoDto"
   /api/v3/AvailableCountries:
     get:
       tags:
@@ -45,24 +45,24 @@ paths:
       summary: Get all available countries
       operationId: CountryAvailableCountries
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CountryV3Dto'
+                  $ref: "#/components/schemas/CountryV3Dto"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CountryV3Dto'
+                  $ref: "#/components/schemas/CountryV3Dto"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/CountryV3Dto'
+                  $ref: "#/components/schemas/CountryV3Dto"
   /api/v3/LongWeekend/{year}/{countryCode}:
     get:
       tags:
@@ -72,36 +72,36 @@ paths:
       parameters:
         - name: year
           in: path
-          description: ''
+          description: ""
           required: true
           schema:
             type: integer
             format: int32
         - name: countryCode
           in: path
-          description: ''
+          description: ""
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/LongWeekendV3Dto'
+                  $ref: "#/components/schemas/LongWeekendV3Dto"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/LongWeekendV3Dto'
+                  $ref: "#/components/schemas/LongWeekendV3Dto"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/LongWeekendV3Dto'
+                  $ref: "#/components/schemas/LongWeekendV3Dto"
   /api/v3/PublicHolidays/{year}/{countryCode}:
     get:
       tags:
@@ -111,39 +111,39 @@ paths:
       parameters:
         - name: year
           in: path
-          description: ''
+          description: ""
           required: true
           schema:
             type: integer
             format: int32
         - name: countryCode
           in: path
-          description: ''
+          description: ""
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Public holidays
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
-        '400':
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
+        "400":
           description: Validation failure
-        '404':
+        "404":
           description: CountryCode is unknown
   /api/v3/IsTodayPublicHoliday/{countryCode}:
     get:
@@ -155,13 +155,13 @@ paths:
       parameters:
         - name: countryCode
           in: path
-          description: ''
+          description: ""
           required: true
           schema:
             type: string
         - name: countyCode
           in: query
-          description: ''
+          description: ""
           schema:
             type: string
         - name: offset
@@ -174,13 +174,13 @@ paths:
             format: int32
             default: 0
       responses:
-        '200':
+        "200":
           description: Today is a public holiday
-        '204':
+        "204":
           description: Today is not a public holiday
-        '400':
+        "400":
           description: Validation failure
-        '404':
+        "404":
           description: CountryCode is unknown
   /api/v3/NextPublicHolidays/{countryCode}:
     get:
@@ -195,24 +195,24 @@ paths:
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
   /api/v3/NextPublicHolidaysWorldwide:
     get:
       tags:
@@ -220,24 +220,24 @@ paths:
       summary: Returns the upcoming public holidays for the next 7 days
       operationId: PublicHolidayNextPublicHolidaysWorldwide
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
             text/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/PublicHolidayV3Dto'
+                  $ref: "#/components/schemas/PublicHolidayV3Dto"
   /api/v3/Version:
     get:
       tags:
@@ -245,18 +245,18 @@ paths:
       summary: Get version of the used Nager.Date library
       operationId: VersionGetVersion
       responses:
-        '200':
+        "200":
           description: Success
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/VersionInfoDto'
+                $ref: "#/components/schemas/VersionInfoDto"
             application/json:
               schema:
-                $ref: '#/components/schemas/VersionInfoDto'
+                $ref: "#/components/schemas/VersionInfoDto"
             text/json:
               schema:
-                $ref: '#/components/schemas/VersionInfoDto'
+                $ref: "#/components/schemas/VersionInfoDto"
 components:
   schemas:
     CountryInfoDto:
@@ -281,7 +281,7 @@ components:
         borders:
           type: array
           items:
-            $ref: '#/components/schemas/CountryInfoDto'
+            $ref: "#/components/schemas/CountryInfoDto"
           description: Country Borders
           nullable: true
       additionalProperties: false
@@ -365,7 +365,7 @@ components:
         types:
           type: array
           items:
-            $ref: '#/components/schemas/PublicHolidayType'
+            $ref: "#/components/schemas/PublicHolidayType"
           description: A list of types the public holiday it is valid
           nullable: true
       additionalProperties: false
