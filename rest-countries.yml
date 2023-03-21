@@ -1,0 +1,309 @@
+openapi: 3.0.1
+servers:
+  - url: https://restcountries.com
+info:
+  title: rest-countries
+  description: Get information about countries via a RESTful API. Available fields include are listed below. If using multiple fields, pass as comma-separated string, for example name,status,continents <br><br>
+    1. name
+    2. tld
+    3. cca2
+    4. ccn3
+    5. cca3
+    6. cioc
+    7. independent
+    8. status
+    9. unMember
+    10. currencies
+    11. idd
+    12. capital
+    13. altSpellings
+    14. region
+    15. subregion
+    16. languages
+    17. translations
+    18. latlng
+    19. landlocked
+    20. borders
+    21. area
+    22. demonyms
+    23. flag
+    24. maps
+    25. population
+    26. gini
+    27. fifa
+    28. car
+    29. timezones
+    30. continents
+    31. flags
+    32. coatOfArms
+    33. startOfWeek
+    34. capitalInfo
+    35. postalCode.
+  contact:
+    name: Alejandro Matos
+    url: https://restcountries.com
+  license:
+    name: Mozilla Public License MPL 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+  version: '3.1'
+paths:
+  /v3.1/all:
+    get:
+      operationId: getAllCountries
+      parameters:
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getAllCountries default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/alpha/{alphacode}:
+    get:
+      operationId: getByAlpha
+      parameters:
+        - name: alphacode
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByAlpha default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/alpha/:
+    get:
+      operationId: getByAlphaList
+      parameters:
+        - name: codes
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByAlphaList default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/currency/{currency}:
+    get:
+      operationId: getByCurrency
+      parameters:
+        - name: currency
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByCurrency default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/name/{name}:
+    get:
+      operationId: getByName
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fullText
+          in: query
+          required: true
+          schema:
+            type: boolean
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByName default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/capital/{capital}:
+    get:
+      operationId: getByCapital
+      parameters:
+        - name: capital
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByCapital default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/region/{region}:
+    get:
+      operationId: getByContinent
+      parameters:
+        - name: region
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByContinent default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/subregion/{subregion}:
+    get:
+      operationId: getBySubRegion
+      parameters:
+        - name: subregion
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getBySubRegion default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/lang/{lang}:
+    get:
+      operationId: getByLanguage
+      parameters:
+        - name: lang
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByLanguage default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/demonym/{demonym}:
+    get:
+      operationId: getByDemonym
+      parameters:
+        - name: demonym
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByDemonym default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/translation/{translation}:
+    get:
+      operationId: getByTranslation
+      parameters:
+        - name: translation
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getByTranslation default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+  /v3.1/independent:
+    get:
+      operationId: getIndependentCountries
+      parameters:
+        - name: status
+          in: query
+          required: true
+          schema:
+            type: boolean
+        - name: fields
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: getIndependentCountries default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestCountries'
+components:
+  schemas:
+    RestCountries:
+      type: array
+      items:
+        $ref: '#/components/schemas/RestCountry'
+    RestCountry:
+      type: object
