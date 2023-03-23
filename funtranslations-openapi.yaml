@@ -18,7 +18,7 @@ info:
   x-providerName: funtranslations.com
   x-serviceName: index
 servers:
-- url: https://api.funtranslations.com/
+- url: https://api.funtranslations.com
 tags:
 - name: Morse
   description: Morse Code Translation API
