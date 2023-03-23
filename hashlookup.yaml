@@ -1,0 +1,288 @@
+openapi: 3.0.1
+info:
+  title: hashlookup CIRCL API
+  description: |-
+    ![](https://www.circl.lu/assets/images/circl-logo.png)
+    [CIRCL hash lookup](https://hashlookup.circl.lu/) is a public API to lookup hash values against known database of files. For more details about all the datasets included [visit the website of the project](https://www.circl.lu/services/hashlookup/). The API is accessible via HTTP ReST API and the API is also [described as an OpenAPI](https://hashlookup.circl.lu/swagger.json). A [documentation is available with](https://www.circl.lu/services/hashlookup/) with sample queries and software using hashlookup. An offline version as Bloom filter is also [available](https://circl.lu/services/hashlookup/#how-to-quickly-check-a-set-of-files-in-a-local-directory). The API can be tested live in the interface below.
+  license:
+    name: CC-BY
+  version: "1.2"
+servers:
+  - url: https://hashlookup.circl.lu
+tags:
+  - name: default
+    description: Default namespace
+paths:
+  /bulk/md5:
+    post:
+      tags:
+        - default
+      description: Bulk search of MD5 hashes in a JSON array with the key 'hashes'. Example MD5 hash - 8ED4B4ED952526D89899E723F3488DE4
+      operationId: post_bulkmd5
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hashes:
+                  type: array
+                  required: true
+                  items:
+                    description: md5 hashes
+                    type: string
+                    example: 8ED4B4ED952526D89899E723F3488DE4
+      responses:
+        200:
+          description: Success
+          content: {}
+        404:
+          description:
+            JSON format incorrect. An array of hashes in the key 'hashes'
+            is expected.
+          content: {}
+  /bulk/sha1:
+    post:
+      tags:
+        - default
+      description: Bulk search of SHA1 hashes in a JSON array with the 'hashes', example SHA1 - FFFFFDAC1B1B4C513896C805C2C698D9688BE69F.
+      operationId: post_bulksha1
+      requestBody:
+        description: Optional description in *Markdown*
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                hashes:
+                  type: array
+                  required: true
+                  items:
+                    description: md5 hashes
+                    type: string
+                    example: FFFFFDAC1B1B4C513896C805C2C698D9688BE69F
+      responses:
+        200:
+          description: Success
+          content: {}
+        404:
+          description:
+            JSON format incorrect. An array of hashes in the key 'hashes'
+            is expected.
+          content: {}
+  /children/{sha1}/{count}/{cursor}:
+    get:
+      tags:
+        - default
+      description:
+        Return children from a given SHA1.  A number of element to return
+        and an offset must be given. If not set it will be the 100 first elements.
+        A cursor must be given to paginate over. The starting cursor is 0.
+      operationId: get_children
+      parameters:
+        - name: sha1
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: count
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cursor
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: SHA1 value incorrect, expecting a SHA1 value in hex format
+          content: {}
+        404:
+          description: The SHA1 value has no known child.
+          content: {}
+  /info:
+    get:
+      tags:
+        - default
+      description: Info about the hashlookup database
+      operationId: get_info
+      responses:
+        200:
+          description: Success
+          content: {}
+  /lookup/md5/{md5}:
+    get:
+      tags:
+        - default
+      description: Lookup MD5.
+      operationId: get_lookup_md5
+      parameters:
+        - name: md5
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: MD5 value incorrect, expecting a MD5 value in hex format
+          content: {}
+        404:
+          description: Non existing MD5
+          content: {}
+  /lookup/sha1/{sha1}:
+    get:
+      tags:
+        - default
+      description: Lookup SHA-1.
+      operationId: get_lookup_sha1
+      parameters:
+        - name: sha1
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: SHA1 value incorrect, expecting a SHA1 value in hex format
+          content: {}
+        404:
+          description: Non existing SHA1
+          content: {}
+  /lookup/sha256/{sha256}:
+    get:
+      tags:
+        - default
+      description: Lookup SHA-256.
+      operationId: get_lookup_sha256
+      parameters:
+        - name: sha256
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: SHA-256 value incorrect, expecting a SHA-256 value in hex format
+          content: {}
+        404:
+          description: Non existing SHA-256
+          content: {}
+  /parents/{sha1}/{count}/{cursor}:
+    get:
+      tags:
+        - default
+      description:
+        Return parents from a given SHA1. A number of element to return
+        and an offset must be given. If not set it will be the 100 first elements.
+        A cursor must be given to paginate over. The starting cursor is 0.
+      operationId: get_parents
+      parameters:
+        - name: sha1
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: count
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: cursor
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: SHA1 value incorrect, expecting a SHA1 value in hex format
+          content: {}
+        404:
+          description: The SHA1 value has no known parent.
+          content: {}
+  /session/create/{name}:
+    get:
+      tags:
+        - default
+      description:
+        Create a session key to keep search context. The session is attached
+        to a name. After the session is created, the header `hashlookup_session` can
+        be set to the session name.
+      operationId: get_session_create
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: Expecting a name for the session
+          content: {}
+        500:
+          description: Session feature is not enabled
+          content: {}
+  /session/get/{name}:
+    get:
+      tags:
+        - default
+      description: Return set of matching and non-matching hashes from a session.
+      operationId: get_session_matches
+      parameters:
+        - name: name
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: Expecting a name for the session
+          content: {}
+        500:
+          description: Session feature is not enabled
+          content: {}
+  /stats/top:
+    get:
+      tags:
+        - default
+      description: Return the top 100 of most queried values.
+      operationId: get_stattop
+      responses:
+        200:
+          description: Success
+          content: {}
+        400:
+          description: Public statistics not enabled
+          content: {}
+components:
+  responses:
+    MaskError:
+      description: When any error occurs on mask
+      content: {}
+    ParseError:
+      description: When a mask can't be parsed
+      content: {}
