@@ -3,7 +3,8 @@ servers:
   - url: https://restcountries.com
 info:
   title: rest-countries
-  description: Get information about countries via a RESTful API. Available fields include are listed below. If using multiple fields, pass as comma-separated string, for example name,status,continents <br><br>
+  description: |
+    Get information about countries via a RESTful API. Available fields that are returned include are listed below. If using multiple fields, pass as comma-separated string in the fields , for example name,status,continents <br><br>
     1. name
     2. tld
     3. cca2
@@ -50,6 +51,7 @@ paths:
   /v3.1/all:
     get:
       operationId: getAllCountries
+      summary:  "Get a list of all the countries and their details. This includes all fields like population, timezones, currency, continents and others." 
       parameters:
         - name: fields
           in: query
@@ -66,15 +68,18 @@ paths:
   /v3.1/alpha/{alphacode}:
     get:
       operationId: getByAlpha
+
+      summary:  "Search by cca2, ccn3, cca3 or cioc country code"
       parameters:
         - name: alphacode
           in: path
           required: true
+          description: "cca2, ccn3, cca3 or cioc country code" 
           schema:
             type: string
         - name: fields
           in: query
-          required: true
+          description: list of comma separated fields to return
           schema:
             type: string
       responses:
@@ -91,11 +96,12 @@ paths:
         - name: codes
           in: query
           required: true
+          description: list of comma separated cca2, ccn3, cca3 or cioc country code 
           schema:
             type: string
         - name: fields
           in: query
-          required: true
+          description: list of comma separated fields to return
           schema:
             type: string
       responses:
@@ -108,15 +114,17 @@ paths:
   /v3.1/currency/{currency}:
     get:
       operationId: getByCurrency
+      summary:  Find a country/countries using its/their currency code e.g usd, gbp
       parameters:
         - name: currency
           in: path
           required: true
           schema:
             type: string
+          description:  Currency code
         - name: fields
           in: query
-          required: true
+          description: list of comma separated fields to return
           schema:
             type: string
       responses:
@@ -129,20 +137,22 @@ paths:
   /v3.1/name/{name}:
     get:
       operationId: getByName
+      summary: Get a country by its name
       parameters:
         - name: name
           in: path
           required: true
+          description: Name of the country
           schema:
             type: string
         - name: fullText
           in: query
-          required: true
+          description: Indicates if the name should be matched fully by text or to be searched. Set true to match the name exactly and false for search. 
           schema:
             type: boolean
         - name: fields
           in: query
-          required: true
+          description: list of comma separated fields to return
           schema:
             type: string
       responses:
@@ -155,6 +165,7 @@ paths:
   /v3.1/capital/{capital}:
     get:
       operationId: getByCapital
+      summary: Get a country from its capital city/state
       parameters:
         - name: capital
           in: path
@@ -162,8 +173,8 @@ paths:
           schema:
             type: string
         - name: fields
+          description: list of comma separated fields to return
           in: query
-          required: true
           schema:
             type: string
       responses:
@@ -176,15 +187,17 @@ paths:
   /v3.1/region/{region}:
     get:
       operationId: getByContinent
+      summary: Get countries in a specific continent
       parameters:
         - name: region
           in: path
           required: true
+          description: Continent name 
           schema:
             type: string
         - name: fields
           in: query
-          required: true
+          description: list of comma separated fields to return
           schema:
             type: string
       responses:
@@ -197,15 +210,17 @@ paths:
   /v3.1/subregion/{subregion}:
     get:
       operationId: getBySubRegion
+      summary: Get countries in a subregion e.g Nothern Europe 
       parameters:
         - name: subregion
+          description: The name of the subregion
           in: path
           required: true
           schema:
             type: string
         - name: fields
+          description: list of comma separated fields to return
           in: query
-          required: true
           schema:
             type: string
       responses:
@@ -218,15 +233,17 @@ paths:
   /v3.1/lang/{lang}:
     get:
       operationId: getByLanguage
+      summary: Get a list of countries by language
       parameters:
         - name: lang
+          description: the language e.g. spanish
           in: path
           required: true
           schema:
             type: string
         - name: fields
+          description: list of comma separated fields to return
           in: query
-          required: true
           schema:
             type: string
       responses:
@@ -239,15 +256,17 @@ paths:
   /v3.1/demonym/{demonym}:
     get:
       operationId: getByDemonym
+      summary:  Get country from demonym e.g. american
       parameters:
         - name: demonym
           in: path
+          description: Demonym e.g. canadian, american 
           required: true
           schema:
             type: string
         - name: fields
+          description: list of comma separated fields to return
           in: query
-          required: true
           schema:
             type: string
       responses:
@@ -260,15 +279,17 @@ paths:
   /v3.1/translation/{translation}:
     get:
       operationId: getByTranslation
+      summary : Get a country by its translated name e.g.  alemania for germany
       parameters:
         - name: translation
           in: path
+          description: Country name in a different language e.g. alemania
           required: true
           schema:
             type: string
         - name: fields
+          description: list of comma separated fields to return
           in: query
-          required: true
           schema:
             type: string
       responses:
