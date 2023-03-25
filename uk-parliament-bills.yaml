@@ -1,7 +1,13 @@
 openapi: 3.0.1
 info:
   title: Bills API
-  description: API to get and search for information regarding Bills, their stages, associated amendments and publications.
+  description: API to get and search for information regarding Bills, their stages, associated amendments and publications. 
+
+    For pagination the following parameters are used - 
+      
+      1. Skip - This signifies the offset to be used
+      
+      2. Take - This signifies the number of items to be fetched
   contact:
     name: UK Parliament
     url: https://www.parliament.uk
@@ -16,17 +22,16 @@ paths:
         - Amendments
       summary: Returns a list of amendments.
       operationId: GetAmendments
+      description: Returns a list of amendments based on specified filters.
       parameters:
         - name: billId
           in: path
-          description: Amendments relating to a Bill with Bill ID specified
           required: true
           schema:
             type: integer
             format: int32
         - name: billStageId
           in: path
-          description: Amendments relating to a Bill stage with Bill stage ID specified
           required: true
           schema:
             type: integer
@@ -96,18 +101,17 @@ paths:
       tags:
         - Amendments
       summary: Returns an amendment.
+      description: Returns an amendment related to a particular stage of a bill.
       operationId: GetAmendment
       parameters:
         - name: billId
           in: path
-          description: Amendment relating to a bill with bill ID specified
           required: true
           schema:
             type: integer
             format: int32
         - name: billStageId
           in: path
-          description: Amendment relating to a bill stage with bill stage ID specified
           required: true
           schema:
             type: integer
@@ -161,6 +165,7 @@ paths:
       tags:
         - Bill News
       summary: Returns a list of news articles for a Bill.
+      description: Get all news articles related to a given bill.
       operationId: GetNewsArticles
       parameters:
         - name: billId
@@ -221,6 +226,8 @@ paths:
       tags:
         - Bill Types
       summary: Returns a list of Bill types.
+      description: Returns a list of Bill types.
+      operationId: GetBillTypes
       parameters:
         - name: Category
           in: query
@@ -266,6 +273,7 @@ paths:
       tags:
         - Bills
       summary: Returns a list of Bills.
+      description: Returns a list of Bills based on filters.
       operationId: GetBills
       parameters:
         - name: SearchTerm
@@ -374,12 +382,12 @@ paths:
     get:
       tags:
         - Bills
+      description: Get information about a particular bill.
       summary: Return a Bill.
       operationId: GetBill
       parameters:
         - name: billId
           in: path
-          description: Bill with ID specified
           required: true
           schema:
             type: integer
@@ -425,19 +433,18 @@ paths:
     get:
       tags:
         - Bills
+      description: Get details of a particular stage of a given bill.
       summary: Returns a Bill stage.
-      operationId: GetBillStageDetails
+      operationId: GetBillStage
       parameters:
         - name: billId
           in: path
-          description: Bill stage relating to Bill with Bill ID specified
           required: true
           schema:
             type: integer
             format: int32
         - name: billStageId
           in: path
-          description: Bill stage with ID specified
           required: true
           schema:
             type: integer
@@ -484,10 +491,11 @@ paths:
       tags:
         - Bills
       summary: Returns all Bill stages.
+      description: Get all stages related to a given bill.
+      operationId: GetBillStages
       parameters:
         - name: billId
           in: path
-          description: Stages relating to a Bill with Bill ID specified
           required: true
           schema:
             type: integer
@@ -544,11 +552,11 @@ paths:
       tags:
         - Publications
       summary: Return a list of Bill publications.
+      description: Get all publications related to a given bill.
       operationId: GetBillPublication
       parameters:
         - name: billId
           in: path
-          description: Publications relating to Bill with Bill ID specified
           required: true
           schema:
             type: integer
@@ -595,6 +603,8 @@ paths:
       tags:
         - Publications
       summary: Return a list of Bill stage publications.
+      description: Get all publications related to a given stage of a bill.
+      operationId: GetBillStagePublications
       parameters:
         - name: billId
           in: path
@@ -650,6 +660,7 @@ paths:
       tags:
         - Sittings
       summary: Returns a list of Sittings.
+      description: Get all the sittings based on filters.
       operationId: GetSittings
       parameters:
         - name: House
@@ -706,6 +717,8 @@ paths:
       tags:
         - Stages
       summary: Returns a list of Bill stages.
+      description: Get a list of all the stages that a bill can be in.
+      operationId: GetStages
       parameters:
         - name: Skip
           in: query
