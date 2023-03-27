@@ -2939,7 +2939,7 @@ info:
   contact:
     email: support@thespacedevs.com
     name: The Space Devs
-  description: ''
+  description: "Includes information on space launches, agencies, space stations, astranauts and launch locations. Some query fields end with _lte and _gte indicating that the fields can be used to query for the minimum and maximum values (inclusive). limit fields are used to limit the number of results returned. ordering fields can be passed the name of the field to order the returned results by."
   license:
     name: Apache License 2.0
   title: Launch Library
@@ -3143,8 +3143,7 @@ paths:
         name: landings_count__lte
         schema:
           type: integer
-      - description: limit results
-        in: query
+      - in: query
         name: limit
         required: false
         schema:
@@ -3231,8 +3230,7 @@ paths:
         name: id
         schema:
           type: integer
-      - description: Limit results
-        in: query
+      - in: query
         name: limit
         required: false
         schema:
@@ -3251,8 +3249,7 @@ paths:
             type: integer
           type: array
         style: form
-      - description: A search term.
-        in: query
+      - in: query
         name: search
         required: false
         schema:
@@ -3309,20 +3306,17 @@ paths:
       description: Launch List
       operationId: getLaunch
       parameters:
-      - description: Last Update is greater than or equal to
-        in: query
+      - in: query
         name: last_updated__gte
         schema:
           format: date-time
           type: string
-      - description: Last Update is less than or equal to
-        in: query
+      - in: query
         name: last_updated__lte
         schema:
           format: date-time
           type: string
-      - description: Number of results to return per page.
-        in: query
+      - in: query
         name: limit
         required: false
         schema:
@@ -3351,8 +3345,7 @@ paths:
         name: name
         schema:
           type: string
-      - description: offset
-        in: query
+      - in: query
         name: offset
         required: false
         schema:
@@ -3373,14 +3366,12 @@ paths:
         name: orbital_launch_attempt_count_year__lte
         schema:
           type: integer
-      - description: Which field to use when ordering the results.
-        in: query
+      - in: query
         name: ordering
         required: false
         schema:
           type: string
-      - description: A search term.
-        in: query
+      - in: query
         name: search
         required: false
         schema:
@@ -3395,26 +3386,22 @@ paths:
           maximum: 2147483647
           minimum: -2147483648
           type: integer
-      - description: Window End is greater than or equal to
-        in: query
+      - in: query
         name: window_end__gte
         schema:
           format: date-time
           type: string
-      - description: Window End is less than or equal to
-        in: query
+      - in: query
         name: window_end__lte
         schema:
           format: date-time
           type: string
-      - description: Window Start is greater than or equal to
-        in: query
+      - in: query
         name: window_start__gte
         schema:
           format: date-time
           type: string
-      - description: Window Start is less than or equal to
-        in: query
+      - in: query
         name: window_start__lte
         schema:
           format: date-time
@@ -3470,8 +3457,7 @@ paths:
         name: id
         schema:
           type: integer
-      - description: limiy
-        in: query
+      - in: query
         name: limit
         required: false
         schema:
@@ -3484,14 +3470,12 @@ paths:
         name: name__contains
         schema:
           type: string
-      - description: offset
-        in: query
+      - in: query
         name: offset
         required: false
         schema:
           type: integer
-      - description: search term.
-        in: query
+      - in: query
         name: search
         required: false
         schema:
@@ -3558,8 +3542,7 @@ paths:
         name: id
         schema:
           type: integer
-      - description: Limit results
-        in: query
+      - in: query
         name: limit
         required: false
         schema:
@@ -3572,8 +3555,7 @@ paths:
         name: name__contains
         schema:
           type: string
-      - description: Offset
-        in: query
+      - in: query
         name: offset
         required: false
         schema:
@@ -3586,14 +3568,12 @@ paths:
         name: onboard_crew__lte
         schema:
           type: integer
-      - description: Ordering field
-        in: query
+      - in: query
         name: ordering
         required: false
         schema:
           type: string
-      - description: search term.
-        in: query
+      - in: query
         name: search
         required: false
         schema:
