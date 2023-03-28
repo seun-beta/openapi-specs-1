@@ -261,7 +261,7 @@ paths:
             type: string
         - name: vs_currency
           in: query
-          description: The target currency of market data (usd, eur, jpy, etc.)
+          description: The target currency of market data (usd, eur etc.)
           required: true
           schema:
             type: string
@@ -305,7 +305,7 @@ paths:
             type: string
         - name: vs_currency
           in: query
-          description: The target currency of market data (usd, eur, jpy, etc.)
+          description: The target currency of market data (usd, eur etc.)
           required: true
           schema:
             type: string
@@ -400,7 +400,7 @@ paths:
       summary: Search for coins, categories and markets on CoinGecko
       description:
         Search for coins, categories and markets listed on CoinGecko ordered
-        by largest Market Cap first
+        by largest Market Cap
       parameters:
         - name: query
           in: query
