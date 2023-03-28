@@ -65,7 +65,7 @@ paths:
       summary: Get list of supported_vs_currencies.
       responses:
         200:
-          description: list of supported_vs_currencies
+          description: list of currencies supported by coin gecko
           content: {}
   /coins/markets:
     get:
@@ -75,7 +75,7 @@ paths:
       summary:
         List all supported coins price, market cap, volume, and market related
         data
-      description: Use this to obtain all the coins market data.
+      description: Use this to obtain all the coins market data e.g coins price, market cap, volume
       parameters:
         - name: vs_currency
           in: query
@@ -181,7 +181,7 @@ paths:
             type: boolean
         - name: community_data
           in: query
-          description: "Include community_data "
+          description: "Include community_data (true/false) [default: true]"
           schema:
             enum:
               - true
@@ -190,7 +190,7 @@ paths:
             type: boolean
         - name: sparkline
           in: query
-          description: "Include sparkline 7 days data"
+          description: "Include sparkline 7 days data (true/false) [default: true]"
           schema:
             enum:
               - true
@@ -382,7 +382,7 @@ paths:
       parameters:
         - name: id
           in: path
-          description: id of nft collection (can be obtained from /nfts/list)
+          description: id of nft collection (can be obtained from nftsList)
           required: true
           schema:
             type: string
