@@ -73,13 +73,12 @@ paths:
       tags:
         - coins
       summary:
-        List all supported coins price, market cap, volume, and market related
-        data
+        List all supported coins price, market cap, volume
       description: Use this to obtain all the coins market data e.g coins price, market cap, volume
       parameters:
         - name: vs_currency
           in: query
-          description: The target currency of market data (usd, eur, jpy, etc.)
+          description: The target currency of market data (usd, eur etc.)
           required: true
           schema:
             type: string
