@@ -65,7 +65,7 @@ paths:
       summary: Get list of supported_vs_currencies.
       responses:
         200:
-          description: list of currencies supported by coin gecko
+          description: list of supported_vs_currencies
           content: {}
   /coins/markets:
     get:
@@ -171,7 +171,7 @@ paths:
             type: boolean
         - name: market_data
           in: query
-          description: "Include market_data (true/false) [default: true]"
+          description: "Include market_data (true/false)"
           schema:
             enum:
               - true
@@ -180,7 +180,7 @@ paths:
             type: boolean
         - name: community_data
           in: query
-          description: "Include community_data (true/false) [default: true]"
+          description: "Include community_data (true/false)"
           schema:
             enum:
               - true
@@ -189,7 +189,7 @@ paths:
             type: boolean
         - name: sparkline
           in: query
-          description: "Include sparkline 7 days data (true/false) [default: true]"
+          description: "Include sparkline 7 days data (true/false)"
           schema:
             enum:
               - true
